@@ -4,20 +4,24 @@
  */
 package MedInfo;
 
-import java.awt.EventQueue;
 import java.awt.Image;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -60,6 +64,42 @@ public class MedResult extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+        displayPrescription();
+    }
+    
+    private void displayPrescription(){
+        try {
+            // Connect to the SQLite database
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            // Prepare the SQL statement to retrieve the image
+            String sql = "SELECT Prescription FROM Appointment WHERE AppointmentID = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, appointmentID); // Assuming you want to retrieve the image with ID 1
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+            // Retrieve the image bytes from the result set
+            if (rs.next()) {
+                byte[] imageData = rs.getBytes("Prescription");
+                
+                // Convert the bytes to an Image
+                InputStream is = new ByteArrayInputStream(imageData);
+                BufferedImage bufferedImage = ImageIO.read(is);
+                Image image = bufferedImage.getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH);
+                
+                // Set the Image to the JLabel
+                jLabel2.setIcon(new ImageIcon(image));
+            }
+            
+            // Close the resources
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+        } catch (SQLException | IOException ex) {
+            ex.printStackTrace();
+        }
+        
     }
 
     /**
@@ -81,15 +121,15 @@ public class MedResult extends javax.swing.JFrame {
         Result = new javax.swing.JLabel();
         prescription = new javax.swing.JLabel();
         Conclusion = new javax.swing.JLabel();
-        pic = new javax.swing.JLabel();
         Conclu = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Results = new javax.swing.JTextArea();
         date1 = new javax.swing.JLabel();
         Date1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         topboard = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(800, 600));
@@ -136,9 +176,6 @@ public class MedResult extends javax.swing.JFrame {
         Conclusion.setText("Conclusion:");
         jPanel1.add(Conclusion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
-        pic.setBackground(new java.awt.Color(0, 255, 51));
-        jPanel1.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 430, 360));
-
         Conclu.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         Conclu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,16 +198,8 @@ public class MedResult extends javax.swing.JFrame {
         Date1.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         jPanel1.add(Date1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 80, -1));
 
-        jButton1.setBackground(new java.awt.Color(39, 123, 192));
-        jButton1.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -110, -1, -1));
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 350, 340));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 800, 440));
 
@@ -182,6 +211,17 @@ public class MedResult extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/list.png"))); // NOI18N
         jLabel1.setText("Appointment History");
         topboard.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 47, 414, -1));
+
+        jButton2.setBackground(new java.awt.Color(39, 123, 192));
+        jButton2.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        topboard.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         getContentPane().add(topboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 160));
 
@@ -197,13 +237,13 @@ public class MedResult extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AppointmentIDActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         MedReports med = new MedReports();
         med.show();
         this.dispose();
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
 
     /**
      * @param args the command line arguments
@@ -243,7 +283,7 @@ public class MedResult extends javax.swing.JFrame {
         });
     }
     
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AppointmentID;
     private javax.swing.JTextField Conclu;
@@ -256,11 +296,11 @@ public class MedResult extends javax.swing.JFrame {
     private javax.swing.JLabel d;
     private javax.swing.JLabel date1;
     private javax.swing.JLabel department;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel pic;
     private javax.swing.JLabel prescription;
     private javax.swing.JLabel time;
     private javax.swing.JPanel topboard;
