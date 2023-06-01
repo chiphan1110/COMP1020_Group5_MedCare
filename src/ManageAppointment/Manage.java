@@ -3,20 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ManageAppointment;
-import Dashboard.*;
 import Register.*;
 import Ratings.*;
 import java.sql.*;
 import javax.swing.JOptionPane;
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellEditor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.awt.*;
 /**
  *
  * @author Admin

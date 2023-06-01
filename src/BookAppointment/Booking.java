@@ -8,7 +8,6 @@ import Dashboard.*;
 import ManageAppointment.*;
 import MedInfo.*;
 import javax.swing.JFrame;
-import PageController.*;
 import Register.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
