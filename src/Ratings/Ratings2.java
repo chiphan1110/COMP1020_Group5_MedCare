@@ -29,6 +29,21 @@ public class Ratings2 extends javax.swing.JFrame {
         displayAppointment();
     }
     
+    void updateFeedback(){
+        comment = comment_box.getText();
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            String sql = "UPDATE Appointment SET Feedback=?, FirstFB=0 WHERE AppointmentID=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, comment);
+            stmt.setInt(2, selectedAppointment);
+            int i = stmt.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     void updateRatings(){
         rate = Integer.parseInt(txt_rate.getText());
         try {
@@ -74,13 +89,13 @@ public class Ratings2 extends javax.swing.JFrame {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\\\sqlite\\\\db\\\\test.sqlite");
             String sql1 = "SELECT * FROM SignUp WHERE UserID=?";
             PreparedStatement stmt = conn.prepareStatement(sql1);
-            stmt.setInt(1, 1);
+//            stmt.setInt(1, 1);
 //            please try the code under to see if it cause error:
-//            stmt.setInt(1, userid);
+            stmt.setInt(1, userid);
             ResultSet rs1 = stmt.executeQuery();
             String userName = rs1.getString("Name");
             lbl_name.setText(userName);
-            lbl_id.setText("ID: " + userid);
+            lbl_id.setText("" + userid);
         conn.close();
         }catch(Exception e){
             e.printStackTrace();
@@ -141,10 +156,11 @@ public class Ratings2 extends javax.swing.JFrame {
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            String sql = "SELECT * FROM Appointment WHERE UserID = ? AND Status=?";
+            String sql = "SELECT * FROM Appointment WHERE UserID = ? AND Status=? AND FirstFB=1";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1,userid);
             stmt.setString(2, "Past");
+//            stmt.setString(3, "");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 String appointmentID = rs.getString("AppointmentID");
@@ -349,6 +365,7 @@ public class Ratings2 extends javax.swing.JFrame {
         if (validation()){
             JOptionPane.showMessageDialog(this, "Thank you for rating!");
             updateRatings();
+            updateFeedback();
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
