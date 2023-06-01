@@ -47,7 +47,22 @@ public class Ratings extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+    void updateFeedback(){
+        comment = comment_box.getText();
+        rate = Integer.parseInt(txt_rate.getText());
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            String sql = "UPDATE Appointment SET Feedback=?, Rate=?, FirstFB=0 WHERE AppointmentID=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, comment);
+            stmt.setInt(2, rate);
+            stmt.setInt(3, appointmentID);
+            int i = stmt.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     
     boolean validation(){
         String rate2 = txt_rate.getText();
@@ -349,6 +364,7 @@ public class Ratings extends javax.swing.JFrame {
         if (validation()){
             JOptionPane.showMessageDialog(this, "Thank you for rating!");
             updateRatings();
+            updateFeedback();
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed

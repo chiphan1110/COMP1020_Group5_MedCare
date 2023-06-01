@@ -31,13 +31,15 @@ public class Ratings2 extends javax.swing.JFrame {
     
     void updateFeedback(){
         comment = comment_box.getText();
+        rate = Integer.parseInt(txt_rate.getText());
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            String sql = "UPDATE Appointment SET Feedback=?, FirstFB=0 WHERE AppointmentID=?";
+            String sql = "UPDATE Appointment SET Feedback=?, Rate=?, FirstFB=0 WHERE AppointmentID=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, comment);
-            stmt.setInt(2, selectedAppointment);
+            stmt.setInt(2, rate);
+            stmt.setInt(3, selectedAppointment);
             int i = stmt.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
