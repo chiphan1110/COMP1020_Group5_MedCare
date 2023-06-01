@@ -11,7 +11,7 @@ import java.sql.*;
 
 /**
  *
- * @author FPT SHOP
+ * 
  */
 public class SignUp extends javax.swing.JFrame {
 

@@ -12,7 +12,7 @@ import java.util.Date;
 import javax.swing.*;
 /**
  *
- * @author FPT SHOP
+ * 
  */
 public class UserInfo extends javax.swing.JFrame {
     private boolean confirm_check;

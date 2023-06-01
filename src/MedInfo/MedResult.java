@@ -138,7 +138,7 @@ public class MedResult extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(174, 226, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        d.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        d.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         d.setText("Date:");
         jPanel1.add(d, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 40, 20));
 
@@ -157,22 +157,22 @@ public class MedResult extends javax.swing.JFrame {
         Time.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         jPanel1.add(Time, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 80, -1));
 
-        department.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        department.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         department.setText("Department:");
-        jPanel1.add(department, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 80, 20));
+        jPanel1.add(department, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 90, 20));
 
         Department.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         jPanel1.add(Department, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 190, -1));
 
-        Result.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        Result.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         Result.setText("Result:");
         jPanel1.add(Result, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 50, -1));
 
-        prescription.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        prescription.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         prescription.setText("Prescription:");
         jPanel1.add(prescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
 
-        Conclusion.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        Conclusion.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         Conclusion.setText("Conclusion:");
         jPanel1.add(Conclusion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
@@ -191,9 +191,9 @@ public class MedResult extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 279, 205));
 
-        date1.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        date1.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         date1.setText("Appointment ID:");
-        jPanel1.add(date1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 110, -1));
+        jPanel1.add(date1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, -1));
 
         Date1.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         jPanel1.add(Date1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 80, -1));

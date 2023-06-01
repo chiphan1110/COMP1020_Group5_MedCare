@@ -34,12 +34,12 @@ public class BookingSuccessful extends javax.swing.JFrame {
     int userID, appointmentID;
     
     public void getAppointmentInfo(){
-        Booking booking = new Booking();
-        userID = booking.userID;
+        userID = Booking.userID;
+        System.out.println(userID);
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            PreparedStatement stmt = conn.prepareStatement("SELECT AppointmentID, Department, Date, Time, DoctorName FROM Appointment WHERE UserID = ? AND Status = 'Incomming'");
+            PreparedStatement stmt = conn.prepareStatement("SELECT AppointmentID, Department, Date, Time, DoctorName FROM Appointment WHERE UserID = ? AND Status = 'Incoming'");
             stmt.setInt(1, userID);
             ResultSet resultSet = stmt.executeQuery();
             
@@ -49,7 +49,6 @@ public class BookingSuccessful extends javax.swing.JFrame {
                 date = resultSet.getString("Date");
                 time = resultSet.getString("Time");
                 doctorName = resultSet.getString("DoctorName");
-                
                 appointmentIDInfoLabel.setText(String.valueOf(appointmentID));
                 departmentInfoLabel.setText(department);
                 dateInfoLabel.setText(date);

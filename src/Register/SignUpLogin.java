@@ -7,7 +7,6 @@ import java.sql.*;
 import javax.swing.*;
 /**
  *
- * @author FPT SHOP
  */
 public class SignUpLogin {
     /**

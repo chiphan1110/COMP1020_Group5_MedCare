@@ -11,7 +11,7 @@ import java.awt.event.*;
 import Register.Login;
 /**
  *
- * @author FPT SHOP
+ * 
  */
 public class Ratings2 extends javax.swing.JFrame {
     int rate;

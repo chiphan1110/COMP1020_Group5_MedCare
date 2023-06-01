@@ -45,7 +45,8 @@ public class Booking extends JFrame {
     
     String availableDepartment, availableTime, availableDate;
     
-    public int userID, appointmentID, doctorID, timeslotID;
+    public int appointmentID, doctorID, timeslotID;
+    public static int userID;
     
     private boolean shouldPerformAction = true;
     
@@ -534,7 +535,9 @@ public class Booking extends JFrame {
             insertAppointmentDetails();
             insertTimseslotStatus();
             super.dispose();
-            PageController.Submit();
+            BookingSuccessful successful = new BookingSuccessful();
+            successful.setVisible(true);
+            
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
