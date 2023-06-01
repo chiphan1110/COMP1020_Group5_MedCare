@@ -44,7 +44,7 @@ public class Booking extends JFrame {
     
     String availableDepartment, availableTime, availableDate;
     
-    public int appointmentID, doctorID, timeslotID;
+    public int appointmentID, doctorID, timeslotID, availability;
     public static int userID;
     
     private boolean shouldPerformAction = true;
@@ -279,9 +279,37 @@ public class Booking extends JFrame {
 
         stmt.close();
         conn.close();
-    } catch(Exception e){
-        e.printStackTrace();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
+    
+    public void checkConflictTimeslot(){
+        try {
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            PreparedStatement stmt = conn.prepareStatement("SELECT DISTINCT Available FROM Timeslot WHERE Date = ? AND Time = ? AND Department = ?");
+            stmt.setString(1, selectedDate);
+            stmt.setString(2, selectedTime);
+            stmt.setString(3, selectedDepartment);
+            ResultSet resultSet = stmt.executeQuery();
+         
+            while (resultSet.next()) {
+                availability = resultSet.getInt("Available");
+            }
+            if (availability == 0){
+                JOptionPane.showMessageDialog(this, "Sorry, the chosen appointment is already booked. Please return Home");
+                Booking newBooking = new Booking();
+                newBooking.show();
+                this.dispose();
+            }
+            
+            resultSet.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -531,6 +559,7 @@ public class Booking extends JFrame {
             getAppointmentId();
             getDoctorID();
             getDoctorName();
+            checkConflictTimeslot();
             insertAppointmentDetails();
             insertTimseslotStatus();
             super.dispose();
