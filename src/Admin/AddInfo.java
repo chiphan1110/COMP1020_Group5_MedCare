@@ -15,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
-import BookAppointment.*;
 import java.util.ArrayList;
 
 /**
@@ -46,7 +45,6 @@ public class AddInfo extends javax.swing.JFrame {
             stmt.setInt(1, adminID);
             ResultSet resultSet = stmt.executeQuery();
        
-            shouldPerformAction = false;
             while (resultSet.next()) {
                 name = resultSet.getString("Name");
                 dateOfBirth = resultSet.getString("DOB");
@@ -60,7 +58,7 @@ public class AddInfo extends javax.swing.JFrame {
                 phoneNumTextField.setText(phoneNum);
                 addressTextField.setText(address);
             }
-            shouldPerformAction = true;
+            
             
             resultSet.close();
             stmt.close();
@@ -98,11 +96,13 @@ public class AddInfo extends javax.swing.JFrame {
             PreparedStatement stmt = conn.prepareStatement("SELECT DoctorName FROM Doctor WHERE Department = ?");
             stmt.setString(1, selectedDepartment);
             ResultSet resultSet = stmt.executeQuery();
-          
+            
+            shouldPerformAction = false;
             while (resultSet.next()) {
                 doctorName = resultSet.getString("DoctorName");
                 doctorComboBox.addItem(doctorName);
             }
+            shouldPerformAction = true; //commit
             
             resultSet.close();
             stmt.close();
@@ -161,7 +161,6 @@ public class AddInfo extends javax.swing.JFrame {
         }
         return true;
     }
-    
     
     public void insertTimeslot(){
         try{
