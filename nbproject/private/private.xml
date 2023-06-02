@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/D:/CHI/1_UNI_COURSES/2023_Spring/COMP1020_OOP/Project/GroupProject/COMP1020_Group5_MedCare/src/MedInfo/MedResult.java</file>
             <file>file:/D:/CHI/1_UNI_COURSES/2023_Spring/COMP1020_OOP/Project/GroupProject/COMP1020_Group5_MedCare/src/Register/SignUp.java</file>
@@ -15,5 +16,8 @@
             <file>file:/D:/CHI/1_UNI_COURSES/2023_Spring/COMP1020_OOP/Project/GroupProject/COMP1020_Group5_MedCare/src/ManageAppointment/Manage.java</file>
             <file>file:/D:/CHI/1_UNI_COURSES/2023_Spring/COMP1020_OOP/Project/GroupProject/COMP1020_Group5_MedCare/src/Ratings/Ratings2.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> 8e18308b4d572da4322308ffdd1b5a1a28cae892
     </open-files>
 </project-private>
