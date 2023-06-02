@@ -364,7 +364,7 @@ public class Booking extends JFrame {
         viewStatusButton.setBackground(new java.awt.Color(0, 129, 201));
         viewStatusButton.setFont(new java.awt.Font("Cambria", 1, 17)); // NOI18N
         viewStatusButton.setForeground(new java.awt.Color(255, 255, 255));
-        viewStatusButton.setText("Manage ");
+        viewStatusButton.setText("<html><center>Manage<br>Appointment</center></html>");
         viewStatusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewStatusButtonActionPerformed(evt);
@@ -375,7 +375,7 @@ public class Booking extends JFrame {
         medicalRecordsButton.setBackground(new java.awt.Color(0, 129, 201));
         medicalRecordsButton.setFont(new java.awt.Font("Cambria", 1, 17)); // NOI18N
         medicalRecordsButton.setForeground(new java.awt.Color(255, 255, 255));
-        medicalRecordsButton.setText("Medical Record");
+        medicalRecordsButton.setText("<html><center>View<br>Medical Record</center></html>");
         medicalRecordsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 medicalRecordsButtonActionPerformed(evt);
