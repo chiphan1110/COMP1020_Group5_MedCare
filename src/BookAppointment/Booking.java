@@ -42,8 +42,8 @@ public class Booking extends JFrame {
     
     String selectedReason, selectedDepartment, selectedDate, selectedTime, symptomDeclaration, doctorName;
     
-//    String availableDepartment, availableTime, availableDate;
-    String availableDepartment, availableTime;
+    String availableDepartment, availableTime, availableDate;
+//    String availableDepartment, availableTime;
     
     public int appointmentID, doctorID, timeslotID, availability;
     public static int userID;
