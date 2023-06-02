@@ -264,7 +264,7 @@ public class UserInfo extends javax.swing.JFrame {
             if(i>0){
                 JOptionPane.showMessageDialog(this, "Record inserted");
             }else{
-                JOptionPane.showMessageDialog(this, "Current ID: "+userid);
+                JOptionPane.showMessageDialog(this, "Current ID: "+ userid);
             }
         }catch(Exception e){
             e.printStackTrace();

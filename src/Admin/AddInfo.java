@@ -6,7 +6,7 @@ package Admin;
 import Dashboard.*;
 import ManageAppointment.*;
 import MedInfo.*;
-import javax.swing.JFrame;
+import java.text.SimpleDateFormat;
 import Register.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +16,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -28,11 +29,14 @@ public class AddInfo extends javax.swing.JFrame {
      */
     public AddInfo() {
         initComponents();
-//        getAdminInfo();
+        getAdminInfo();
     }
     
-    int adminID, doctorID, retrievedDoctorID;
-    String name, dateOfBirth, gender, phoneNum, address, selectedDate, selectedTime, selectedDepartment, selectedDoctor;
+
+    int adminID, doctorID, retrievedDoctorID, timeslotID;
+    String name, dateOfBirth, gender, phoneNum, address, selectedTime, selectedDepartment, selectedDoctor, doctorName;
+    Date selectedDate;
+    
     private boolean shouldPerformAction = true;
 
     public void getAdminInfo(){
@@ -101,7 +105,7 @@ public class AddInfo extends javax.swing.JFrame {
                 doctorName = resultSet.getString("DoctorName");
                 doctorComboBox.addItem(doctorName);
             }
-            shouldPerformAction = true; //commit
+            shouldPerformAction = true;
             
             resultSet.close();
             stmt.close();
@@ -133,11 +137,13 @@ public class AddInfo extends javax.swing.JFrame {
     
     public boolean checkConflictTimeslot(){
         ArrayList<Integer> retrievedDoctorIDs = new ArrayList<>();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String date = format.format(selectedDate);
         try {
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
             PreparedStatement stmt = conn.prepareStatement("SELECT DISTINCT DoctorID FROM Timeslot WHERE Date = ? AND Time = ? AND Department = ? AND Available = 1");
-            stmt.setString(1, selectedDate);
+            stmt.setString(1, date);
             stmt.setString(2, selectedTime);
             stmt.setString(3, selectedDepartment);
             ResultSet resultSet = stmt.executeQuery();
@@ -162,6 +168,8 @@ public class AddInfo extends javax.swing.JFrame {
     }
     
     public void insertTimeslot(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String date = format.format(selectedDate);
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
@@ -170,7 +178,7 @@ public class AddInfo extends javax.swing.JFrame {
             
             stmt.setInt(1, timeslotID);
             stmt.setInt(2, doctorID);
-            stmt.setString(3, selectedDate);
+            stmt.setString(3, date);
             stmt.setString(4, selectedTime);
             stmt.setInt(5, 1);
             stmt.setString(6, selectedDepartment);
@@ -187,6 +195,11 @@ public class AddInfo extends javax.swing.JFrame {
     boolean validation(){
         
         if(selectedDate.equals("")){
+            JOptionPane.showMessageDialog(this, "please fill all field");
+            return false;
+        }
+        
+        if (selectedDoctor.equals("")){
             JOptionPane.showMessageDialog(this, "please fill all field");
             return false;
         }
@@ -375,7 +388,7 @@ public class AddInfo extends javax.swing.JFrame {
                 doctorComboBoxActionPerformed(evt);
             }
         });
-        panelParent.add(doctorComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, -1, -1));
+        panelParent.add(doctorComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 150, -1));
         panelParent.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 190, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -432,6 +445,7 @@ public class AddInfo extends javax.swing.JFrame {
         // TODO add your handling code here:
         JComboBox<String> comboBox = (JComboBox<String>) evt.getSource();
         selectedDepartment = comboBox.getSelectedItem().toString();
+        getDoctorName();
     }//GEN-LAST:event_departmentComboBoxActionPerformed
 
     private void timeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeComboBoxActionPerformed
@@ -452,6 +466,8 @@ public class AddInfo extends javax.swing.JFrame {
 
     private void doctorComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorComboBoxActionPerformed
         // TODO add your handling code here:
+        JComboBox<String> comboBox = (JComboBox<String>) evt.getSource();
+        selectedDoctor = comboBox.getSelectedItem().toString();
     }//GEN-LAST:event_doctorComboBoxActionPerformed
 
     /**
