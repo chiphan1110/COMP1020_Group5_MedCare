@@ -35,7 +35,7 @@ public class AddInfo extends javax.swing.JFrame {
     int adminID, doctorID, retrievedDoctorID, timeslotID;
     String name, dateOfBirth, gender, phoneNum, address, selectedDate, selectedTime, selectedDepartment, selectedDoctor, doctorName;
     
-    private boolean shouldPerformAction = true;
+    private boolean shouldPerformAction = true; //ok
     
     public void getAdminInfo(){
         adminID = Login.userid;
