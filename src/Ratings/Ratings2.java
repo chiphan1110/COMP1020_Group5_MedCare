@@ -290,19 +290,19 @@ public class Ratings2 extends javax.swing.JFrame {
         lbl_id.setBackground(new java.awt.Color(255, 255, 255));
         lbl_id.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lbl_id.setText("UserID goes here");
-        jPanel2.add(lbl_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 139, -1));
+        jPanel2.add(lbl_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 139, -1));
 
         jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel11.setText("Appointment Date:");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, -1, -1));
 
         lbl_date.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lbl_date.setText("DateHere");
-        jPanel2.add(lbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
+        jPanel2.add(lbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel16.setText("User ID: ");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel4.setText("Name: ");
@@ -322,7 +322,7 @@ public class Ratings2 extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 130, 40));
+        jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 130, 40));
 
         jLabel14.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel14.setText("Rate this appointment (1-10)");
@@ -330,7 +330,7 @@ public class Ratings2 extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel15.setText("Comments and suggestions:");
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 30));
+        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 30));
 
         comment_box.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         comment_box.setText("");

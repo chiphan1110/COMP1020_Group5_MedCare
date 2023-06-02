@@ -32,12 +32,13 @@ public class AddInfo extends javax.swing.JFrame {
         getAdminInfo();
     }
     
+
     int adminID, doctorID, retrievedDoctorID, timeslotID;
     String name, dateOfBirth, gender, phoneNum, address, selectedTime, selectedDepartment, selectedDoctor, doctorName;
     Date selectedDate;
     
     private boolean shouldPerformAction = true;
-    
+
     public void getAdminInfo(){
         adminID = Login.userid;
         try{
@@ -80,7 +81,7 @@ public class AddInfo extends javax.swing.JFrame {
             resultSet = stmt.executeQuery(sql);
             
             while(resultSet.next()){
-                timeslotID = resultSet.getInt(1);
+                int timeslotID = resultSet.getInt(1);
                 timeslotID++;
             }
             resultSet.close();
