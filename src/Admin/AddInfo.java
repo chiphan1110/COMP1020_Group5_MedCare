@@ -77,7 +77,7 @@ public class AddInfo extends javax.swing.JFrame {
             resultSet = stmt.executeQuery(sql);
             
             while(resultSet.next()){
-                timeslotID = resultSet.getInt(1);
+                int timeslotID = resultSet.getInt(1);
                 timeslotID++;
             }
             resultSet.close();
