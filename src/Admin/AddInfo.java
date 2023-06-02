@@ -28,7 +28,7 @@ public class AddInfo extends javax.swing.JFrame {
      */
     public AddInfo() {
         initComponents();
-        getAdminInfo();
+//        getAdminInfo();
     }
     
     int adminID, doctorID, retrievedDoctorID;
