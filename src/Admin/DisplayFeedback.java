@@ -2,12 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Ratings;
+package Admin;
+import Ratings.*;
 import Dashboard.Home;
-import static Ratings.Ratings2.selectedAppointment;
 import java.awt.event.*;
 import java.sql.*;
-import javax.swing.SwingConstants;
 /**
  *
  * @author FPT SHOP
@@ -16,6 +15,7 @@ public class DisplayFeedback extends javax.swing.JFrame {
     String doctorName, doctorID, department;
     int appRate;
     String appComment;
+    static int selectedAppointment = Ratings2.selectedAppointment;
     /**
      * Creates new form DisplayFeedback
      */
@@ -261,6 +261,7 @@ public class DisplayFeedback extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DisplayFeedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
