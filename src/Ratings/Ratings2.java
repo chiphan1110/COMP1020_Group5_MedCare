@@ -17,7 +17,7 @@ public class Ratings2 extends javax.swing.JFrame {
     int rate;
     String doctorName, doctorID, comment, averageRate, date, department;
     
-    static int selectedAppointment=1;
+    public static int selectedAppointment=1;
     int userid = Login.userid;
     /**
      * Creates new form Ratings
