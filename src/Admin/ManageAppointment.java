@@ -170,16 +170,9 @@ public class ManageAppointment extends javax.swing.JFrame {
                 "ID", "User ID", "Name", "Date", "Time", "Department", "Doctor", "Symptom"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -193,8 +186,8 @@ public class ManageAppointment extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(PastTable);
         if (PastTable.getColumnModel().getColumnCount() > 0) {
-            PastTable.getColumnModel().getColumn(0).setPreferredWidth(90);
-            PastTable.getColumnModel().getColumn(1).setPreferredWidth(60);
+            PastTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            PastTable.getColumnModel().getColumn(1).setPreferredWidth(20);
             PastTable.getColumnModel().getColumn(7).setResizable(false);
         }
 
@@ -220,16 +213,9 @@ public class ManageAppointment extends javax.swing.JFrame {
                 "ID", "User ID", "Name", "Date", "Time", "Department", "Doctor", "Symptom"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -243,8 +229,8 @@ public class ManageAppointment extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(IncomingTable);
         if (IncomingTable.getColumnModel().getColumnCount() > 0) {
-            IncomingTable.getColumnModel().getColumn(0).setPreferredWidth(90);
-            IncomingTable.getColumnModel().getColumn(1).setPreferredWidth(60);
+            IncomingTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            IncomingTable.getColumnModel().getColumn(1).setPreferredWidth(20);
             IncomingTable.getColumnModel().getColumn(7).setResizable(false);
         }
 
