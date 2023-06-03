@@ -226,11 +226,6 @@ public class Manage extends javax.swing.JFrame {
         });
 
         UserID.setFont(new java.awt.Font(".AppleSystemUIFont", 0, 13)); // NOI18N
-        UserID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UserIDActionPerformed(evt);
-            }
-        });
 
         dateOfBirthLabel1.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         dateOfBirthLabel1.setText("Address:");
@@ -390,10 +385,6 @@ public class Manage extends javax.swing.JFrame {
     private void addressTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addressTextActionPerformed
-
-    private void UserIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UserIDActionPerformed
 
     private void ApointmentBT1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApointmentBT1ActionPerformed
         // TODO add your handling code here:
