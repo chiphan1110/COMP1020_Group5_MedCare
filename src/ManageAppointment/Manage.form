@@ -396,9 +396,6 @@
               <Font name=".AppleSystemUIFont" size="13" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UserIDActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="dateOfBirthLabel1">
           <Properties>

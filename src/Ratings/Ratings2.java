@@ -17,7 +17,7 @@ public class Ratings2 extends javax.swing.JFrame {
     int rate;
     String doctorName, doctorID, comment, averageRate, date, department;
     
-    static int selectedAppointment=1;
+    public static int selectedAppointment=1;
     int userid = Login.userid;
 //    int userid = 1;
     /**
@@ -25,9 +25,11 @@ public class Ratings2 extends javax.swing.JFrame {
      */
     public Ratings2() {
         initComponents();
-        displayDoctorInfo();
         displayUserInfo();
         displayAppointment();
+        displayDoctorInfo();
+        
+       
     }
     
     void updateFeedback(){
@@ -165,12 +167,13 @@ public class Ratings2 extends javax.swing.JFrame {
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            String sql = "SELECT * FROM Appointment WHERE UserID = ? AND Status=? AND FirstFB=1";
+            String sql = "SELECT DISTINCT * FROM Appointment WHERE UserID = ? AND Status=? AND FirstFB=1";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1,userid);
             stmt.setString(2, "Past");
 //            stmt.setString(3, "");
             ResultSet rs = stmt.executeQuery();
+            appointment_list.removeAllItems();
             while(rs.next()){
                 String appointmentID = rs.getString("AppointmentID");
                 appointment_list.addItem(appointmentID);
@@ -206,10 +209,10 @@ public class Ratings2 extends javax.swing.JFrame {
         appointment_list = new javax.swing.JComboBox<>();
         lbl_name = new javax.swing.JLabel();
         lbl_id = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        lbl_date = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lbl_date = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
@@ -298,6 +301,28 @@ public class Ratings2 extends javax.swing.JFrame {
         lbl_id.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lbl_id.setText("UserID goes here");
         jPanel2.add(lbl_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 139, -1));
+<<<<<<< Updated upstream
+=======
+
+<<<<<<< HEAD
+        jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel11.setText("Appointment Date:");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
+
+        lbl_date.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        lbl_date.setText("DateHere");
+        jPanel2.add(lbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
+
+=======
+>>>>>>> 0e1844a7cedeec0d3639468e0c13e5ef67bff85c
+        jLabel16.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel16.setText("User ID: ");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel4.setText("Name: ");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, 22));
+>>>>>>> Stashed changes
 
         jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel11.setText("Appointment Date:");
@@ -307,6 +332,7 @@ public class Ratings2 extends javax.swing.JFrame {
         lbl_date.setText("DateHere");
         jPanel2.add(lbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
 
+<<<<<<< Updated upstream
         jLabel16.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel16.setText("User ID: ");
         jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
@@ -315,6 +341,8 @@ public class Ratings2 extends javax.swing.JFrame {
         jLabel4.setText("Name: ");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, 22));
 
+=======
+>>>>>>> Stashed changes
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 154, 800, 70));
 
         jPanel6.setBackground(new java.awt.Color(174, 226, 255));
@@ -375,6 +403,8 @@ public class Ratings2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Thank you for rating!");
             updateRatings();
             updateFeedback();
+            displayAppointment();
+     
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
