@@ -15,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -33,14 +32,14 @@ public class AddInfo extends javax.swing.JFrame {
     }
     
 
-    int adminID, doctorID, retrievedDoctorID, timeslotID;
-    String name, dateOfBirth, gender, phoneNum, address, selectedTime, selectedDepartment, selectedDoctor, doctorName;
-    Date selectedDate;
+    int adminID, doctorID, timeslotID;
+    String name, dateOfBirth, gender, phoneNum, address, selectedTime, selectedDepartment, selectedDoctor, doctorName, selectedDate, existingTime;
+    
     
     private boolean shouldPerformAction = true;
 
     public void getAdminInfo(){
-        adminID = Login.userid;
+        adminID = 1;
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
@@ -76,12 +75,12 @@ public class AddInfo extends javax.swing.JFrame {
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            String sql = "SELECT max(AppointmentID) FROM Appointment";
+            String sql = "SELECT max(TimeslotID) FROM Timeslot";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
             
             while(resultSet.next()){
-                int timeslotID = resultSet.getInt(1);
+                timeslotID = resultSet.getInt(1);
                 timeslotID++;
             }
             resultSet.close();
@@ -135,41 +134,32 @@ public class AddInfo extends javax.swing.JFrame {
         }
     }
     
-    public boolean checkConflictTimeslot(){
-        ArrayList<Integer> retrievedDoctorIDs = new ArrayList<>();
+    public void getAvailableTime(){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String date = format.format(selectedDate);
+        selectedDate = format.format(jDateChooser.getDate());
         try {
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            PreparedStatement stmt = conn.prepareStatement("SELECT DISTINCT DoctorID FROM Timeslot WHERE Date = ? AND Time = ? AND Department = ? AND Available = 1");
-            stmt.setString(1, date);
-            stmt.setString(2, selectedTime);
-            stmt.setString(3, selectedDepartment);
+            PreparedStatement stmt = conn.prepareStatement("SELECT DISTINCT Time FROM Timeslot WHERE Department = ? AND DoctorID = ? AND Date = ?");
+            stmt.setString(1, selectedDepartment);
+            stmt.setInt(2, doctorID);
+            stmt.setString(3, selectedDate);
             ResultSet resultSet = stmt.executeQuery();
          
             while (resultSet.next()) {
-                retrievedDoctorID = resultSet.getInt("DoctorID");
-                retrievedDoctorIDs.add(doctorID);
+                existingTime = resultSet.getString("Time");
+                timeComboBox.removeItem(existingTime);
             }
-            
             resultSet.close();
             stmt.close();
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        for (int i : retrievedDoctorIDs){
-            if (doctorID == retrievedDoctorID){
-                JOptionPane.showMessageDialog(this, "The chosen Doctor is already assigned to this timeslot.");
-            }
-        }
-        return true;
     }
     
+    
     public void insertTimeslot(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String date = format.format(selectedDate);
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
@@ -178,11 +168,10 @@ public class AddInfo extends javax.swing.JFrame {
             
             stmt.setInt(1, timeslotID);
             stmt.setInt(2, doctorID);
-            stmt.setString(3, date);
+            stmt.setString(3, selectedDate);
             stmt.setString(4, selectedTime);
             stmt.setInt(5, 1);
             stmt.setString(6, selectedDepartment);
-            stmt.setString(7, selectedDepartment);
             stmt.executeUpdate();
 
             stmt.close();
@@ -247,12 +236,12 @@ public class AddInfo extends javax.swing.JFrame {
         addressTextField = new javax.swing.JTextField();
         departmentComboBox = new javax.swing.JComboBox<>();
         timeComboBox = new javax.swing.JComboBox<>();
-        submitButton = new javax.swing.JButton();
+        AddButton = new javax.swing.JButton();
         dobTextField = new javax.swing.JTextField();
         genderTextField = new javax.swing.JTextField();
         doctorLabel = new javax.swing.JLabel();
         doctorComboBox = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -346,7 +335,6 @@ public class AddInfo extends javax.swing.JFrame {
 
         departmentComboBox.setFont(new java.awt.Font("Cambria", 0, 13)); // NOI18N
         departmentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Internal Medicine", "Pediatrics", "Cardiology", "Dermatology", "Orthopedics", "Emergency Medicine", "Psychiatry" }));
-        getAvailableDepartment();
         departmentComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 departmentComboBoxActionPerformed(evt);
@@ -355,6 +343,7 @@ public class AddInfo extends javax.swing.JFrame {
         panelParent.add(departmentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 300, -1));
 
         timeComboBox.setFont(new java.awt.Font("Cambria", 0, 13)); // NOI18N
+        timeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "9.00-9.30", "9.30-10.00", "10.00-10.30", "10.30-11.00", "14.00-14.30", "14.30-15.00", "15.00-15.30", "15.30-16.00", "16.00-16.30", "16.30-17.00", "19.00-19.30", "19.30-20.00", "20.00-20.30", "20.30-21.00" }));
         timeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 timeComboBoxActionPerformed(evt);
@@ -362,16 +351,16 @@ public class AddInfo extends javax.swing.JFrame {
         });
         panelParent.add(timeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 150, -1));
 
-        submitButton.setBackground(new java.awt.Color(39, 123, 192));
-        submitButton.setFont(new java.awt.Font("Cambria", 0, 17)); // NOI18N
-        submitButton.setForeground(new java.awt.Color(255, 255, 255));
-        submitButton.setText("Submit");
-        submitButton.addActionListener(new java.awt.event.ActionListener() {
+        AddButton.setBackground(new java.awt.Color(39, 123, 192));
+        AddButton.setFont(new java.awt.Font("Cambria", 0, 17)); // NOI18N
+        AddButton.setForeground(new java.awt.Color(255, 255, 255));
+        AddButton.setText("Add");
+        AddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitButtonActionPerformed(evt);
+                AddButtonActionPerformed(evt);
             }
         });
-        panelParent.add(submitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 140, 40));
+        panelParent.add(AddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 140, 40));
 
         dobTextField.setFont(new java.awt.Font("Cambria", 0, 13)); // NOI18N
         panelParent.add(dobTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 140, -1));
@@ -389,7 +378,14 @@ public class AddInfo extends javax.swing.JFrame {
             }
         });
         panelParent.add(doctorComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 150, -1));
-        panelParent.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 190, -1));
+
+        jDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserPropertyChange(evt);
+            }
+        });
+        panelParent.add(jDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 190, -1));
+        jDateChooser.setMinSelectableDate(new Date());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -454,21 +450,28 @@ public class AddInfo extends javax.swing.JFrame {
         selectedTime = comboBox.getSelectedItem().toString();
     }//GEN-LAST:event_timeComboBoxActionPerformed
 
-    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
         // TODO add your handling code here:
         if(validation()){
-            getDoctorID();
-            if (checkConflictTimeslot()){
-                insertTimeslot();
-            }
+            getTimeslotID();
+            insertTimeslot();
+            JOptionPane.showMessageDialog(this, "Added new timeslot successfully");
         }
-    }//GEN-LAST:event_submitButtonActionPerformed
+    }//GEN-LAST:event_AddButtonActionPerformed
 
     private void doctorComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorComboBoxActionPerformed
         // TODO add your handling code here:
         JComboBox<String> comboBox = (JComboBox<String>) evt.getSource();
         selectedDoctor = comboBox.getSelectedItem().toString();
+        getDoctorID();
     }//GEN-LAST:event_doctorComboBoxActionPerformed
+
+    private void jDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPropertyChange
+        // TODO add your handling code here:
+        if ("date".equals(evt.getPropertyName())) {
+            getAvailableTime();
+        }
+    }//GEN-LAST:event_jDateChooserPropertyChange
 
     /**
      * @param args the command line arguments
@@ -506,6 +509,7 @@ public class AddInfo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddButton;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JTextField addressTextField;
     private javax.swing.JLabel appointmentInformationLabel;
@@ -519,7 +523,7 @@ public class AddInfo extends javax.swing.JFrame {
     private javax.swing.JLabel genderLabel;
     private javax.swing.JTextField genderTextField;
     private javax.swing.JButton homeButton;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JButton medicalRecordsButton;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
@@ -528,7 +532,6 @@ public class AddInfo extends javax.swing.JFrame {
     private javax.swing.JLabel phoneNumLabel;
     private javax.swing.JTextField phoneNumTextField;
     private javax.swing.JPanel sideBar;
-    private javax.swing.JButton submitButton;
     private javax.swing.JComboBox<String> timeComboBox;
     private javax.swing.JLabel timeLabel;
     private javax.swing.JButton viewStatusButton;
