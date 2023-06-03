@@ -2,31 +2,97 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Ratings;
+package DoctorAppointment;
 import Dashboard.Home;
-import static Ratings.Ratings2.selectedAppointment;
+import Register.Login;
 import java.awt.event.*;
 import java.sql.*;
-import javax.swing.SwingConstants;
 /**
  *
  * @author FPT SHOP
  */
-public class DisplayFeedback extends javax.swing.JFrame {
+public class ViewDoctorAppointment extends javax.swing.JFrame {
+    int myid = Login.doctorid;
+//    int myid = 1;                for test purpose only
     String doctorName, doctorID, department;
+    static int selectedAppointment;
     int appRate;
     String appComment;
     /**
-     * Creates new form DisplayFeedback
+     * Creates new form ViewDoctorAppointment
      */
-    public DisplayFeedback() {
+    public ViewDoctorAppointment() {
         initComponents();
-        displayAppointment();
-        displayDoctorInfo();
+        viewMyInfo();
+        viewAppointment();
         displayAppointmentInfo();
-//        displayAverageRate();
     }
-
+    
+    private void viewAppointment(){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            String sql = "SELECT * FROM Appointment WHERE DoctorID=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, myid);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                String appointmentID = rs.getString("AppointmentID");
+                appointment_list.addItem(appointmentID);
+            }
+            appointment_list.setSelectedIndex(0);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+    private void displayAppointmentInfo(){
+        appointment_list.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                try{
+                    selectedAppointment = Integer.parseInt(appointment_list.getSelectedItem().toString());
+                    Class.forName("org.sqlite.JDBC");
+                    Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+                    String sql = "SELECT * FROM Appointment WHERE AppointmentId=?";
+                    PreparedStatement stmt = conn.prepareStatement(sql);
+                    stmt.setInt(1, selectedAppointment);
+                    ResultSet rs = stmt.executeQuery();
+                    appRate = rs.getInt("Rate");
+                    appComment = rs.getString("Feedback");
+                    lbl_rate.setText("" + appRate);
+                    lbl_comment.setText("<html><body style='word-wrap: break-word;'>" + appComment + "</body></html>");
+                }catch(Exception a){
+                    a.printStackTrace();
+                }
+            }
+        });
+    }
+    private void viewMyInfo(){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            String sql = "SELECT * FROM Appointment WHERE DoctorId=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, myid);
+            ResultSet rs = stmt.executeQuery();
+        //            averageRate = rs.getString("Rating");
+            doctorName = rs.getString("DoctorName");
+            doctorID = rs.getString("DoctorID");
+            department = rs.getString("Department");
+//                    averageRate = rs.getString("Rating");
+            doctor_name.setText("Dr." + doctorName);
+            lbl_doctorid.setText(doctorID);
+//                    average_rating.setText(averageRate);
+            lbl_department.setText(department);
+            stmt.close();
+            rs.close();
+            conn.close();
+        }catch(Exception a){
+            a.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,6 +108,11 @@ public class DisplayFeedback extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         appointment_list = new javax.swing.JComboBox<>();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        lbl_rate = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        lbl_comment = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -50,11 +121,7 @@ public class DisplayFeedback extends javax.swing.JFrame {
         lbl_department = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         doctor_name = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        lbl_rate = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        lbl_comment = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,7 +151,7 @@ public class DisplayFeedback extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(174, 226, 255));
 
         jLabel2.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel2.setText("Choose an appointment:");
+        jLabel2.setText("My past appointment:");
 
         appointment_list.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         appointment_list.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
@@ -98,7 +165,7 @@ public class DisplayFeedback extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(106, 106, 106)
                 .addComponent(appointment_list, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,74 +178,6 @@ public class DisplayFeedback extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 800, 70));
-
-        jPanel3.setBackground(new java.awt.Color(174, 226, 255));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/doctor.png"))); // NOI18N
-
-        jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel11.setText("Doctor ID:");
-
-        jLabel13.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel13.setText("Department:");
-
-        lbl_doctorid.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        lbl_doctorid.setText("DoctorIDHere");
-
-        lbl_department.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        lbl_department.setText("DepartmentHere");
-
-        jLabel4.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel4.setText("Doctor name: ");
-
-        doctor_name.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        doctor_name.setText("DoctorNameGoesHere");
-        doctor_name.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel4))
-                        .addGap(62, 62, 62)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(doctor_name)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lbl_doctorid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbl_department, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(jLabel3)))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel3)
-                .addGap(58, 58, 58)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doctor_name))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(lbl_doctorid))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(lbl_department))
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 350, 370));
 
         jPanel4.setBackground(new java.awt.Color(174, 226, 255));
 
@@ -226,6 +225,81 @@ public class DisplayFeedback extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 450, 370));
 
+        jPanel3.setBackground(new java.awt.Color(174, 226, 255));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/doctor.png"))); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel11.setText("Doctor ID:");
+
+        jLabel13.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel13.setText("Department:");
+
+        lbl_doctorid.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        lbl_doctorid.setText("DoctorIDHere");
+
+        lbl_department.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        lbl_department.setText("DepartmentHere");
+
+        jLabel4.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel4.setText("Doctor name: ");
+
+        doctor_name.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        doctor_name.setText("DoctorNameGoesHere");
+        doctor_name.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel5.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        jLabel5.setText("My Information");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel4))
+                        .addGap(62, 62, 62)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(doctor_name)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lbl_doctorid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_department, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3))))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctor_name))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(lbl_doctorid))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(lbl_department))
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 350, 370));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -253,97 +327,24 @@ public class DisplayFeedback extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DisplayFeedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDoctorAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DisplayFeedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDoctorAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DisplayFeedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDoctorAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DisplayFeedback.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewDoctorAppointment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DisplayFeedback().setVisible(true);
+                new ViewDoctorAppointment().setVisible(true);
             }
         });
     }
-    
-    private void displayAppointment(){
-        try{
-            Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            String sql = "SELECT * FROM Appointment WHERE FirstFB=0";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-//            stmt.setString(3, "");
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                String appointmentID = rs.getString("AppointmentID");
-                appointment_list.addItem(appointmentID);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-    
-    private void displayAppointmentInfo(){
-        appointment_list.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                try{
-                    selectedAppointment = Integer.parseInt(appointment_list.getSelectedItem().toString());
-                    Class.forName("org.sqlite.JDBC");
-                    Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-                    String sql = "SELECT * FROM Appointment WHERE AppointmentId=?";
-                    PreparedStatement stmt = conn.prepareStatement(sql);
-                    stmt.setInt(1, selectedAppointment);
-                    ResultSet rs = stmt.executeQuery();
-                    appRate = rs.getInt("Rate");
-                    appComment = rs.getString("Feedback");
-                    lbl_rate.setText("" + appRate);
-                    lbl_comment.setText("<html><body style='word-wrap: break-word;'>" + appComment + "</body></html>");
-                }catch(Exception a){
-                    a.printStackTrace();
-                }
-            }
-        });
-    }
-    
-    private void displayDoctorInfo(){
-        appointment_list.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                
-                try{
-                    selectedAppointment = Integer.parseInt(appointment_list.getSelectedItem().toString());
-                    Class.forName("org.sqlite.JDBC");
-                    Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-                    String sql = "SELECT * FROM Appointment WHERE AppointmentId=?";
-                    PreparedStatement stmt = conn.prepareStatement(sql);
-                    stmt.setInt(1, selectedAppointment);
-                    ResultSet rs = stmt.executeQuery();
-        //            averageRate = rs.getString("Rating");
-                    doctorName = rs.getString("DoctorName");
-                    doctorID = rs.getString("DoctorID");
-                    department = rs.getString("Department");
-//                    averageRate = rs.getString("Rating");
-                    doctor_name.setText("Dr." + doctorName);
-                    lbl_doctorid.setText(doctorID);
-//                    average_rating.setText(averageRate);
-                    lbl_department.setText(department);
-                    stmt.close();
-                    rs.close();
-                    conn.close();
-                }catch(Exception a){
-                    a.printStackTrace();
-        }
-            }
-        });
-        
-    }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> appointment_list;
     private javax.swing.JLabel doctor_name;
@@ -356,6 +357,7 @@ public class DisplayFeedback extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
