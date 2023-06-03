@@ -7,7 +7,6 @@ import Dashboard.*;
 import ManageAppointment.*;
 import MedInfo.*;
 import java.text.SimpleDateFormat;
-import Register.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,65 +15,65 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author truonghuy
  */
-public class AddInfo extends javax.swing.JFrame {
+public class EditTimeslot extends javax.swing.JFrame {
 
     /**
      * Creates new form AddInfo
      */
-    public AddInfo() {
+    public EditTimeslot() {
         initComponents();
-        getAdminInfo();
+        updateTimeslotTable();
     }
     
 
-    int adminID, doctorID, timeslotID;
-    String name, dateOfBirth, gender, phoneNum, address, selectedTime, selectedDepartment, selectedDoctor, doctorName, selectedDate, existingTime;
+    int doctorID, timeslotID;
+    String selectedTime, selectedDepartment, selectedDoctor, doctorName, selectedDate, existingTime;
     
+    String retrievedTimeslotID, retrievedDoctorID, retrievedDate, retrievedTime, retrievedAvailable, retrievedDepartment;
     
     private boolean shouldPerformAction = true;
-
-    public void getAdminInfo(){
-        adminID = 1;
+    
+    public void updateTimeslotTable(){
         try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            PreparedStatement stmt = conn.prepareStatement("SELECT Name, DOB, Gender, PhoneNumber, Address FROM SignUp WHERE UserID = ?");
-            stmt.setInt(1, adminID);
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/truonghuy/Desktop/sqlite/test.sqlite");
+            PreparedStatement stmt = conn.prepareStatement("SELECT TimeslotID, DoctorID, Date, Time, Available, Department FROM Timeslot");
             ResultSet resultSet = stmt.executeQuery();
+            DefaultTableModel model = (DefaultTableModel)timeslotTable.getModel();
+            model.setRowCount(0);
        
             while (resultSet.next()) {
-                name = resultSet.getString("Name");
-                dateOfBirth = resultSet.getString("DOB");
-                gender = resultSet.getString("Gender");
-                phoneNum = resultSet.getString("PhoneNumber");
-                address = resultSet.getString("Address");
                 
-                nameTextField.setText(name);
-                dobTextField.setText(dateOfBirth);
-                genderTextField.setText(gender);
-                phoneNumTextField.setText(phoneNum);
-                addressTextField.setText(address);
+                retrievedTimeslotID = String.valueOf(resultSet.getInt("TimeslotID"));
+                retrievedDoctorID = String.valueOf(resultSet.getInt("DoctorID"));
+                retrievedDate = resultSet.getString("Date");
+                retrievedTime = resultSet.getString("Time");
+                retrievedAvailable = String.valueOf(resultSet.getInt("Available"));
+                retrievedDepartment = resultSet.getString("Department");
+                  
+                String tbData[] = {retrievedTimeslotID, retrievedDoctorID, retrievedDate, retrievedTime, retrievedAvailable, retrievedDepartment};  
+                model.addRow(tbData); 
             }
-            
-            
             resultSet.close();
             stmt.close();
             conn.close();
+            
         }catch(Exception e){
             e.printStackTrace();
         }
     }
     
-    public void getTimeslotID(){
+    public void createTimeslotID(){
         ResultSet resultSet = null;
         try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/truonghuy/Desktop/sqlite/test.sqlite");
             String sql = "SELECT max(TimeslotID) FROM Timeslot";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(sql);
@@ -94,7 +93,7 @@ public class AddInfo extends javax.swing.JFrame {
     public void getDoctorName(){
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/truonghuy/Desktop/sqlite/test.sqlite");
             PreparedStatement stmt = conn.prepareStatement("SELECT DoctorName FROM Doctor WHERE Department = ?");
             stmt.setString(1, selectedDepartment);
             ResultSet resultSet = stmt.executeQuery();
@@ -117,7 +116,7 @@ public class AddInfo extends javax.swing.JFrame {
     public void getDoctorID(){
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/truonghuy/Desktop/sqlite/test.sqlite");
             PreparedStatement stmt = conn.prepareStatement("SELECT DoctorID FROM Doctor WHERE DoctorName = ?");
             stmt.setString(1, selectedDoctor);
             ResultSet resultSet = stmt.executeQuery();
@@ -139,7 +138,7 @@ public class AddInfo extends javax.swing.JFrame {
         selectedDate = format.format(jDateChooser.getDate());
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/truonghuy/Desktop/sqlite/test.sqlite");
             PreparedStatement stmt = conn.prepareStatement("SELECT DISTINCT Time FROM Timeslot WHERE Department = ? AND DoctorID = ? AND Date = ?");
             stmt.setString(1, selectedDepartment);
             stmt.setInt(2, doctorID);
@@ -162,7 +161,7 @@ public class AddInfo extends javax.swing.JFrame {
     public void insertTimeslot(){
         try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/truonghuy/Desktop/sqlite/test.sqlite");
             String sql = "INSERT INTO Timeslot (TimeslotID, DoctorID, Date, Time, Available, Department) VALUES (?,?,?,?,?,?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             
@@ -181,7 +180,7 @@ public class AddInfo extends javax.swing.JFrame {
         }
     }
     
-    boolean validation(){
+    boolean validationOfAdding(){
         
         if(selectedDate.equals("")){
             JOptionPane.showMessageDialog(this, "please fill all field");
@@ -204,7 +203,8 @@ public class AddInfo extends javax.swing.JFrame {
         }
         return true;
     }
-    
+
+
     
 
     /**
@@ -222,26 +222,21 @@ public class AddInfo extends javax.swing.JFrame {
         medicalRecordsButton = new javax.swing.JButton();
         panelParent = new javax.swing.JPanel();
         timeLabel = new javax.swing.JLabel();
-        dateOfBirthLabel = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
-        addressLabel = new javax.swing.JLabel();
-        genderLabel = new javax.swing.JLabel();
-        phoneNumLabel = new javax.swing.JLabel();
-        patienInformationLabel = new javax.swing.JLabel();
         appointmentInformationLabel = new javax.swing.JLabel();
         departmentLabel = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
-        nameTextField = new javax.swing.JTextField();
-        phoneNumTextField = new javax.swing.JTextField();
-        addressTextField = new javax.swing.JTextField();
         departmentComboBox = new javax.swing.JComboBox<>();
         timeComboBox = new javax.swing.JComboBox<>();
         AddButton = new javax.swing.JButton();
-        dobTextField = new javax.swing.JTextField();
-        genderTextField = new javax.swing.JTextField();
         doctorLabel = new javax.swing.JLabel();
         doctorComboBox = new javax.swing.JComboBox<>();
         jDateChooser = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        timeslotTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        DeleteButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -286,52 +281,19 @@ public class AddInfo extends javax.swing.JFrame {
 
         timeLabel.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         timeLabel.setText("Time:");
-        panelParent.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
-
-        dateOfBirthLabel.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        dateOfBirthLabel.setText("Date of birth:");
-        panelParent.add(dateOfBirthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
-
-        nameLabel.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        nameLabel.setText("Name:");
-        panelParent.add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
-
-        addressLabel.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        addressLabel.setText("Address:");
-        panelParent.add(addressLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
-
-        genderLabel.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        genderLabel.setText("Gender:");
-        panelParent.add(genderLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
-
-        phoneNumLabel.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        phoneNumLabel.setText("Phone number:");
-        panelParent.add(phoneNumLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
-
-        patienInformationLabel.setFont(new java.awt.Font("Cambria", 1, 17)); // NOI18N
-        patienInformationLabel.setText("Admin Information");
-        panelParent.add(patienInformationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        panelParent.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
         appointmentInformationLabel.setFont(new java.awt.Font("Cambria", 1, 17)); // NOI18N
         appointmentInformationLabel.setText("Add Timeslot");
-        panelParent.add(appointmentInformationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        panelParent.add(appointmentInformationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
         departmentLabel.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         departmentLabel.setText("Department:");
-        panelParent.add(departmentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+        panelParent.add(departmentLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
         dateLabel.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         dateLabel.setText("Date:");
-        panelParent.add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
-
-        nameTextField.setFont(new java.awt.Font("Cambria", 0, 13)); // NOI18N
-        panelParent.add(nameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 190, -1));
-
-        phoneNumTextField.setFont(new java.awt.Font("Cambria", 0, 13)); // NOI18N
-        panelParent.add(phoneNumTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 160, -1));
-
-        addressTextField.setFont(new java.awt.Font("Cambria", 0, 13)); // NOI18N
-        panelParent.add(addressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 340, -1));
+        panelParent.add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
         departmentComboBox.setFont(new java.awt.Font("Cambria", 0, 13)); // NOI18N
         departmentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Internal Medicine", "Pediatrics", "Cardiology", "Dermatology", "Orthopedics", "Emergency Medicine", "Psychiatry" }));
@@ -340,7 +302,7 @@ public class AddInfo extends javax.swing.JFrame {
                 departmentComboBoxActionPerformed(evt);
             }
         });
-        panelParent.add(departmentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 300, -1));
+        panelParent.add(departmentComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 220, -1));
 
         timeComboBox.setFont(new java.awt.Font("Cambria", 0, 13)); // NOI18N
         timeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "9.00-9.30", "9.30-10.00", "10.00-10.30", "10.30-11.00", "14.00-14.30", "14.30-15.00", "15.00-15.30", "15.30-16.00", "16.00-16.30", "16.30-17.00", "19.00-19.30", "19.30-20.00", "20.00-20.30", "20.30-21.00" }));
@@ -349,7 +311,7 @@ public class AddInfo extends javax.swing.JFrame {
                 timeComboBoxActionPerformed(evt);
             }
         });
-        panelParent.add(timeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 150, -1));
+        panelParent.add(timeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 160, -1));
 
         AddButton.setBackground(new java.awt.Color(39, 123, 192));
         AddButton.setFont(new java.awt.Font("Cambria", 0, 17)); // NOI18N
@@ -360,16 +322,10 @@ public class AddInfo extends javax.swing.JFrame {
                 AddButtonActionPerformed(evt);
             }
         });
-        panelParent.add(AddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 140, 40));
-
-        dobTextField.setFont(new java.awt.Font("Cambria", 0, 13)); // NOI18N
-        panelParent.add(dobTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 140, -1));
-
-        genderTextField.setFont(new java.awt.Font("Cambria", 0, 13)); // NOI18N
-        panelParent.add(genderTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 90, -1));
+        panelParent.add(AddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 140, 40));
 
         doctorLabel.setText("Doctor:");
-        panelParent.add(doctorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
+        panelParent.add(doctorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
         doctorComboBox.setToolTipText("");
         doctorComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -377,15 +333,53 @@ public class AddInfo extends javax.swing.JFrame {
                 doctorComboBoxActionPerformed(evt);
             }
         });
-        panelParent.add(doctorComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 150, -1));
+        panelParent.add(doctorComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 200, -1));
 
         jDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jDateChooserPropertyChange(evt);
             }
         });
-        panelParent.add(jDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 190, -1));
+        panelParent.add(jDateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 190, -1));
         jDateChooser.setMinSelectableDate(new Date());
+
+        timeslotTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "TimeslotID", "DoctorID", "Date", "Time", "Available", "Department"
+            }
+        ));
+        jScrollPane1.setViewportView(timeslotTable);
+
+        panelParent.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 580, 180));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 17)); // NOI18N
+        jLabel1.setText("Delete Timeslot");
+        panelParent.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+
+        DeleteButton.setBackground(new java.awt.Color(39, 123, 192));
+        DeleteButton.setFont(new java.awt.Font("Helvetica Neue", 0, 17)); // NOI18N
+        DeleteButton.setForeground(new java.awt.Color(255, 255, 255));
+        DeleteButton.setText("Delete");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
+        panelParent.add(DeleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 140, 40));
+
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
+        jLabel2.setText("* Select timeslot in the table above");
+        panelParent.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 464, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 17)); // NOI18N
+        jLabel3.setText("Timeslot Table");
+        panelParent.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -439,9 +433,11 @@ public class AddInfo extends javax.swing.JFrame {
 
     private void departmentComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboBoxActionPerformed
         // TODO add your handling code here:
-        JComboBox<String> comboBox = (JComboBox<String>) evt.getSource();
-        selectedDepartment = comboBox.getSelectedItem().toString();
-        getDoctorName();
+        if (shouldPerformAction){
+            JComboBox<String> comboBox = (JComboBox<String>) evt.getSource();
+            selectedDepartment = comboBox.getSelectedItem().toString();
+            getDoctorName();
+        }
     }//GEN-LAST:event_departmentComboBoxActionPerformed
 
     private void timeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeComboBoxActionPerformed
@@ -452,10 +448,11 @@ public class AddInfo extends javax.swing.JFrame {
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
         // TODO add your handling code here:
-        if(validation()){
-            getTimeslotID();
+        if(validationOfAdding()){
+            createTimeslotID();
             insertTimeslot();
             JOptionPane.showMessageDialog(this, "Added new timeslot successfully");
+            updateTimeslotTable();
         }
     }//GEN-LAST:event_AddButtonActionPerformed
 
@@ -472,6 +469,36 @@ public class AddInfo extends javax.swing.JFrame {
             getAvailableTime();
         }
     }//GEN-LAST:event_jDateChooserPropertyChange
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        // TODO add your handling code here:
+        int row = timeslotTable.getSelectedRow();
+
+        if (row == -1){
+            JOptionPane.showMessageDialog(this, "Please choose the timeslot!");
+        } else {
+            timeslotID = Integer.parseInt(timeslotTable.getValueAt(row, 0).toString());
+            
+            
+            try{
+                Class.forName("org.sqlite.JDBC");
+                Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/truonghuy/Desktop/sqlite/test.sqlite");
+                PreparedStatement stmt = conn.prepareStatement("DELETE FROM Timeslot WHERE TimeslotID = ?");
+                stmt.setInt(1, timeslotID);
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("Timeslot deleted successfully.");
+                } else {
+                    System.out.println("No timeslot found with the given id.");
+                }
+                conn.close();
+            } catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex);
+            }
+            JOptionPane.showMessageDialog(this, "Timeslot deleted.");
+        }
+        updateTimeslotTable();
+    }//GEN-LAST:event_DeleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -490,50 +517,48 @@ public class AddInfo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditTimeslot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditTimeslot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditTimeslot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditTimeslot.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddInfo().setVisible(true);
+                new EditTimeslot().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
-    private javax.swing.JLabel addressLabel;
-    private javax.swing.JTextField addressTextField;
+    private javax.swing.JButton DeleteButton;
     private javax.swing.JLabel appointmentInformationLabel;
     private javax.swing.JLabel dateLabel;
-    private javax.swing.JLabel dateOfBirthLabel;
     private javax.swing.JComboBox<String> departmentComboBox;
     private javax.swing.JLabel departmentLabel;
-    private javax.swing.JTextField dobTextField;
     private javax.swing.JComboBox<String> doctorComboBox;
     private javax.swing.JLabel doctorLabel;
-    private javax.swing.JLabel genderLabel;
-    private javax.swing.JTextField genderTextField;
     private javax.swing.JButton homeButton;
     private com.toedter.calendar.JDateChooser jDateChooser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton medicalRecordsButton;
-    private javax.swing.JLabel nameLabel;
-    private javax.swing.JTextField nameTextField;
     private javax.swing.JPanel panelParent;
-    private javax.swing.JLabel patienInformationLabel;
-    private javax.swing.JLabel phoneNumLabel;
-    private javax.swing.JTextField phoneNumTextField;
     private javax.swing.JPanel sideBar;
     private javax.swing.JComboBox<String> timeComboBox;
     private javax.swing.JLabel timeLabel;
+    private javax.swing.JTable timeslotTable;
     private javax.swing.JButton viewStatusButton;
     // End of variables declaration//GEN-END:variables
 }

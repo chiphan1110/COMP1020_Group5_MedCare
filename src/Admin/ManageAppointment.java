@@ -40,7 +40,7 @@ public class ManageAppointment extends javax.swing.JFrame {
     public void updateStatus(){
             try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/truonghuy/Desktop/sqlite/test.sqlite");
             PreparedStatement stmt = conn.prepareStatement("SELECT AppointmentID, Date from Appointment");
 //            stmt.setInt(1, userid);
             ResultSet rs = stmt.executeQuery();
@@ -72,15 +72,14 @@ public class ManageAppointment extends javax.swing.JFrame {
     public void ViewIncomingAppointment(){
         try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            PreparedStatement stmt = conn.prepareStatement("SELECT Appointment.AppointmentID, Appointment.UserID, SignUp.Name, Appointment.DoctorName, Appointment.Date, Appointment.Time, Appointment.Department, Appointment.Symptom FROM Appointment INNER JOIN SignUP ON Appointment.UserID = SignUp.UserID WHERE Status = ?");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/truonghuy/Desktop/sqlite/test.sqlite");
+            PreparedStatement stmt = conn.prepareStatement("SELECT Appointment.AppointmentID, Appointment.UserID, SignUp.Name, Appointment.DoctorName, Appointment.Date, Appointment.Time, Appointment.Department, Appointment.Symptom FROM Appointment INNER JOIN SignUp ON Appointment.UserID = SignUp.UserID WHERE Status = ?");
             stmt.setString(1, "Incoming");
             ResultSet rsTable = stmt.executeQuery();
             DefaultTableModel tb1Model = (DefaultTableModel)IncomingTable.getModel();
             tb1Model.setRowCount(0);
        
             while (rsTable.next()) {
-                
                 appointID = rsTable.getString("AppointmentID");
                 userID = rsTable.getString("UserID");
                 name = rsTable.getString("Name");
@@ -106,9 +105,9 @@ public class ManageAppointment extends javax.swing.JFrame {
     public void ViewPastAppointment(){
         try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/truonghuy/Desktop/sqlite/test.sqlite");
             PreparedStatement stmt = conn.prepareStatement("SELECT Appointment.AppointmentID, Appointment.UserID, SignUp.Name, Appointment.DoctorName, Appointment.Date, Appointment.Time, Appointment.Department, Appointment.Symptom FROM Appointment INNER JOIN SignUP ON Appointment.UserID = SignUp.UserID WHERE Status = ?");
-            stmt.setString(1, "Past");
+            stmt.setString(1, "Past");  
             ResultSet rsTable = stmt.executeQuery();
             DefaultTableModel tb1Model = (DefaultTableModel)PastTable.getModel();
             tb1Model.setRowCount(0);
