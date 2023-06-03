@@ -104,7 +104,7 @@ public class FinalPostResult extends javax.swing.JFrame {
                 .addComponent(backAdminHome)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
-                .addContainerGap(149, Short.MAX_VALUE)
+                .addContainerGap(147, Short.MAX_VALUE)
                 .addComponent(patientInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122))
         );
@@ -301,9 +301,9 @@ public class FinalPostResult extends javax.swing.JFrame {
                     .addComponent(dob)
                     .addComponent(gender))
                 .addGap(18, 18, 18)
-                .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chooseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(address))
+                .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(address)
+                    .addComponent(chooseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(res)
@@ -383,6 +383,10 @@ public class FinalPostResult extends javax.swing.JFrame {
                 chooseAddress.setText(rsfill.getString("Address"));
                 AppDate.setText(rsfill.getString("Date"));
                 AppTime.setText(rsfill.getString("Time"));
+            }
+            String query = "SELECT COUNT(*) FROM Appointment WHERE AppointmentID = ?";
+            if (rsfill.getInt(1) == 0){
+                JOptionPane.showMessageDialog(null, "The provided ID does not exist.", "Error", JOptionPane.ERROR_MESSAGE);
             }
             stmt.close();
             con.close();
