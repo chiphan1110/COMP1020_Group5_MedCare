@@ -78,7 +78,11 @@ public class ManageApppointment extends javax.swing.JFrame {
                 int ID = rs.getInt("AppointmentID");
                 String D = rs.getString("Date");
 
+<<<<<<< HEAD
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+=======
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd");
+>>>>>>> main
                 Date date = dateFormat.parse(D);
                 Date currentDate = new Date();
                 currentDate.setYear(0);
@@ -134,7 +138,11 @@ public class ManageApppointment extends javax.swing.JFrame {
                 int ID = rs.getInt("AppointmentID");
                 String D = rs.getString("Date");
 
+<<<<<<< HEAD
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+=======
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd");
+>>>>>>> main
                 Date date = dateFormat.parse(D);
                 Date currentDate = new Date();
                 currentDate.setYear(0);

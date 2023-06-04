@@ -57,10 +57,10 @@ public class MedRecord extends javax.swing.JFrame {
                 String time = rsTable.getString("Time");
                 String department = rsTable.getString("Department");
                 String symptom = rsTable.getString("Symptom");
-                String status = rsTable.getString("Status");
+//                String status = rsTable.getString("Status");
                 
                 //String array to store data into Jtable
-                String tbData[] = {appointmentId, date1, time, department, symptom, status};  
+                String tbData[] = {appointmentId, date1, time, department, symptom};  
                 
                 //add string array into jtable
                 tblModel.addRow(tbData);
@@ -181,7 +181,7 @@ public class MedRecord extends javax.swing.JFrame {
 
             },
             new String [] {
-                "AppointmentID", "Date", "Time", "Department", "Symptoms", "Status"
+                "AppointmentID", "Date", "Time", "Department", "Symptoms"
             }
         ));
         His.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -350,8 +350,9 @@ public class MedRecord extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please choose the appointment!");
         } else {
             appointmentID = Integer.parseInt(His.getValueAt(view, 0).toString()); 
-            super.dispose();
-            new MedResult().setVisible(true);
+            MedResult res = new MedResult();
+            res.show();
+            this.dispose();
         }
     }//GEN-LAST:event_ApointmentBTActionPerformed
 

@@ -4,6 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MedCare/src/Dashboard/DoctorHome.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MedCare/src/Dashboard/AdminHome.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MedCare/src/Dashboard/PatientHome.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MedCare/src/Admin/AdManageAppointment.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MedCare/src/Doctor/DrManageAppointment.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MedCare/nbproject/build-native.xml~</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MedCare/src/Patient/ManageApppointment.java</file>
+=======
+<<<<<<< HEAD
             <file>file:/D:/CHI/1_UNI_COURSES/2023_Spring/COMP1020_OOP/Project/GroupProject/COMP1020_Group5_MedCare/src/Admin/ManageAppointment.java</file>
             <file>file:/D:/CHI/1_UNI_COURSES/2023_Spring/COMP1020_OOP/Project/GroupProject/COMP1020_Group5_MedCare/src/MedInfo/MedResult.java</file>
             <file>file:/D:/CHI/1_UNI_COURSES/2023_Spring/COMP1020_OOP/Project/GroupProject/COMP1020_Group5_MedCare/src/Register/Login.java</file>
@@ -21,6 +30,7 @@
 =======
             <file>file:/C:/Users/Admin/Documents/Final/COMP1020_Group5_MedCare/src/Dashboard/AdminHome.java</file>
             <file>file:/C:/Users/Admin/Documents/Final/COMP1020_Group5_MedCare/src/Admin/ManageAppointment.java</file>
+>>>>>>> main
 >>>>>>> main
         </group>
     </open-files>

@@ -19,7 +19,6 @@ public class FeedbackAll extends javax.swing.JFrame {
     
     public static int selectedAppointment=1;
     int userid = Login.userid;
-//    int userid = 1;
     /**
      * Creates new form Ratings
      */
@@ -43,7 +42,10 @@ public class FeedbackAll extends javax.swing.JFrame {
             stmt.setString(1, comment);
             stmt.setInt(2, rate);
             stmt.setInt(3, selectedAppointment);
-            int i = stmt.executeUpdate();
+            stmt.executeUpdate();
+            conn.close();
+    //        rs.close();
+            stmt.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -58,8 +60,10 @@ public class FeedbackAll extends javax.swing.JFrame {
             PreparedStatement stmt2 = conn.prepareStatement(sql2);
             stmt2.setInt(1, rate);
             stmt2.setInt(2, Integer.parseInt(doctorID));
-            int i = stmt2.executeUpdate();
+            stmt2.executeUpdate();
         conn.close();
+//        rs.close();
+        stmt2.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -88,6 +92,9 @@ public class FeedbackAll extends javax.swing.JFrame {
         if(rate < 1 || rate > 10){
             JOptionPane.showMessageDialog(this, "Rating must be from 1-10");
             return false;
+<<<<<<< HEAD
+        }
+=======
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Rating must be a number from 1-10");
@@ -97,6 +104,7 @@ public class FeedbackAll extends javax.swing.JFrame {
         comment = comment_box.getText();
         
         
+>>>>>>> main
         
         if(comment.equals("")){
             JOptionPane.showMessageDialog(this, "Please give some comment");
@@ -108,7 +116,7 @@ public class FeedbackAll extends javax.swing.JFrame {
     private void displayUserInfo(){
         try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\\\sqlite\\\\db\\\\test.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
             String sql1 = "SELECT * FROM SignUp WHERE UserID=?";
             PreparedStatement stmt = conn.prepareStatement(sql1);
 //            stmt.setInt(1, 1);
@@ -119,25 +127,13 @@ public class FeedbackAll extends javax.swing.JFrame {
             lbl_name.setText(userName);
             lbl_id.setText("" + userid);
         conn.close();
+        rs1.close();
+        stmt.close();
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-//    private void displayUserInfo(){
-//        try{
-//            Class.forName("org.sqlite.JDBC");
-//            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-//            String sql = "SELECT * FROM SignUp WHERE UserID=?";
-//            PreparedStatement stmt = conn.prepareStatement(sql);
-//            stmt.setInt(1, userid);
-//            ResultSet rs = stmt.executeQuery();
-//            String username = rs.getString("Name");
-//            lbl_name.setText(username);
-//            lbl_id.setText("ID: " + userid);
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//    }
+
     
     private void displayDoctorInfo(){
         appointment_list.addActionListener(new ActionListener(){
@@ -146,6 +142,7 @@ public class FeedbackAll extends javax.swing.JFrame {
                 
                 try{
                     selectedAppointment = Integer.parseInt(appointment_list.getSelectedItem().toString());
+                    System.out.println(appointment_list.getSelectedItem());
                     Class.forName("org.sqlite.JDBC");
                     Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
                     String sql = "SELECT * FROM Appointment WHERE AppointmentId=?";
@@ -163,9 +160,10 @@ public class FeedbackAll extends javax.swing.JFrame {
 //                    average_rating.setText(averageRate);
                     lbl_date.setText(date);
                     lbl_department.setText(department);
-            stmt.close();
-            rs.close();
-            conn.close();
+                    stmt.close();
+                    rs.close();
+                    conn.close();
+
                 }catch(Exception a){
                     a.printStackTrace();
         }
@@ -178,17 +176,20 @@ public class FeedbackAll extends javax.swing.JFrame {
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            String sql = "SELECT DISTINCT * FROM Appointment WHERE UserID = ? AND Status=? AND FirstFB=1";
+            String sql = "SELECT DISTINCT * FROM Appointment WHERE UserID = ? AND Status=? AND FirstFB=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1,userid);
             stmt.setString(2, "Past");
-//            stmt.setString(3, "");
+            stmt.setInt(3, 1);
             ResultSet rs = stmt.executeQuery();
             appointment_list.removeAllItems();
             while(rs.next()){
                 String appointmentID = rs.getString("AppointmentID");
                 appointment_list.addItem(appointmentID);
             }
+        conn.close();
+        rs.close();
+        stmt.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -271,7 +272,11 @@ public class FeedbackAll extends javax.swing.JFrame {
 
         lbl_doctorid.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lbl_doctorid.setText("                       ");
+<<<<<<< HEAD
+        jPanel5.add(lbl_doctorid, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 130, -1));
+=======
         jPanel5.add(lbl_doctorid, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 75, -1));
+>>>>>>> main
 
         jLabel13.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel13.setText("Department:");
@@ -279,7 +284,11 @@ public class FeedbackAll extends javax.swing.JFrame {
 
         lbl_department.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lbl_department.setText("                        ");
+<<<<<<< HEAD
+        jPanel5.add(lbl_department, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 130, -1));
+=======
         jPanel5.add(lbl_department, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+>>>>>>> main
 
         jLabel12.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel12.setText("Doctor ID: ");
@@ -300,6 +309,11 @@ public class FeedbackAll extends javax.swing.JFrame {
 
         appointment_list.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         appointment_list.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        appointment_list.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointment_listActionPerformed(evt);
+            }
+        });
         jPanel2.add(appointment_list, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 220, -1));
 
         lbl_name.setBackground(new java.awt.Color(255, 255, 255));
@@ -310,28 +324,7 @@ public class FeedbackAll extends javax.swing.JFrame {
         lbl_id.setBackground(new java.awt.Color(255, 255, 255));
         lbl_id.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lbl_id.setText("UserID goes here");
-        jPanel2.add(lbl_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 139, -1));
-
-        jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel11.setText("Appointment Date:");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
-
-        lbl_date.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        lbl_date.setText("DateHere");
-        jPanel2.add(lbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
-
-
-        jLabel16.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel16.setText("User ID: ");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
-
-        jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        jLabel11.setText("Appointment Date:");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
-
-        lbl_date.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        lbl_date.setText("DateHere");
-        jPanel2.add(lbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
+        jPanel2.add(lbl_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 139, -1));
 
         jLabel16.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel16.setText("User ID: ");
@@ -341,16 +334,24 @@ public class FeedbackAll extends javax.swing.JFrame {
         jLabel4.setText("Name: ");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, 22));
 
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD:src/Patient/FeedbackAll.java
+>>>>>>> main
         jLabel11.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel11.setText("Appointment Date:");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, -1, -1));
 
         lbl_date.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+<<<<<<< HEAD
+        jPanel2.add(lbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 220, 20));
+
+=======
         jPanel2.add(lbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 70, 20));
 
 =======
 >>>>>>> main:src/Ratings/Ratings2.java
+>>>>>>> main
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 154, 800, 70));
 
         jPanel6.setBackground(new java.awt.Color(174, 226, 255));
@@ -365,7 +366,7 @@ public class FeedbackAll extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 130, 40));
+        jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 130, 40));
 
         jLabel14.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel14.setText("Rate this appointment (1-10)");
@@ -373,7 +374,7 @@ public class FeedbackAll extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         jLabel15.setText("Comments and suggestions:");
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 30));
+        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 30));
 
         comment_box.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
         comment_box.setText("");
@@ -411,9 +412,12 @@ public class FeedbackAll extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Thank you for rating!");
             updateRatings();
             updateFeedback();
+//            if (appointment_list.getSelectedItem() != null){
             displayAppointment();
-     
+//            }
+            
         }
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -427,6 +431,10 @@ public class FeedbackAll extends javax.swing.JFrame {
         h.show();
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void appointment_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointment_listActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_appointment_listActionPerformed
 
     /**
      * @param args the command line arguments

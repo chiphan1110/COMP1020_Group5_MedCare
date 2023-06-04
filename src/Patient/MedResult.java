@@ -148,7 +148,7 @@ public class MedResult extends javax.swing.JFrame {
                 AppointmentIDActionPerformed(evt);
             }
         });
-        jPanel1.add(AppointmentID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 150, 20));
+        jPanel1.add(AppointmentID, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 150, 25));
 
         time.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         time.setText("Time:");

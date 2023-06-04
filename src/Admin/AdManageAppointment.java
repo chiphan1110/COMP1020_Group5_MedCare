@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Admin;
+<<<<<<< HEAD
+import Dashboard.*;
+=======
+>>>>>>> main
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -44,7 +48,7 @@ public class AdManageAppointment extends javax.swing.JFrame {
                 int ID = rs.getInt("AppointmentID");
                 String D = rs.getString("Date");
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = dateFormat.parse(D);
                 Date currentDate = new Date();
                 currentDate.setYear(0);
@@ -69,7 +73,11 @@ public class AdManageAppointment extends javax.swing.JFrame {
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
+<<<<<<< HEAD
+            PreparedStatement stmt = conn.prepareStatement("SELECT Appointment.AppointmentID, Appointment.UserID, SignUp.Name, Appointment.DoctorID, Appointment.DoctorName, Appointment.Date, Appointment.Time,Appointment.Department,Appointment.Symptom FROM Appointment INNER JOIN SignUp ON Appointment.UserID = SignUp.UserID WHERE Status = ?");
+=======
             PreparedStatement stmt = conn.prepareStatement("SELECT Appointment.*, SignUp.* FROM Appointment INNER JOIN SignUp ON Appointment.UserID = SignUp.UserID WHERE Status = ?");
+>>>>>>> main
             stmt.setString(1, "Incoming");
             ResultSet rsTable = stmt.executeQuery();
             DefaultTableModel tb1Model = (DefaultTableModel)IncomingTable.getModel();
@@ -344,7 +352,11 @@ public class AdManageAppointment extends javax.swing.JFrame {
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
+        AdminHome home= new AdminHome();
+=======
         Dashboard.PatientHome home = new Dashboard.PatientHome();
+>>>>>>> main
         home.show();
         this.dispose();
     }//GEN-LAST:event_BackButtonActionPerformed

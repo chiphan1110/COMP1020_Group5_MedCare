@@ -102,7 +102,7 @@ public class Feedback1 extends javax.swing.JFrame {
             ResultSet rs1 = stmt.executeQuery();
             String userName = rs1.getString("Name");
             lbl_name2.setText(userName);
-            lbl_id.setText("ID: " + userid);
+            lbl_id.setText(" " + userid);
         conn.close();
         }catch(Exception e){
             e.printStackTrace();

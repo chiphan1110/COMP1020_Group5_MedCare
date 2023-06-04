@@ -119,6 +119,12 @@ public class AdminHome extends javax.swing.JFrame {
 
     private void MedicalReportAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicalReportAction
 
+<<<<<<< HEAD
+        Register.Login login = new Register.Login();
+        login.show();
+        this.dispose();
+=======
+>>>>>>> main
     }//GEN-LAST:event_MedicalReportAction
 
     private void AdManageAppointmentMedicalReportAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdManageAppointmentMedicalReportAction

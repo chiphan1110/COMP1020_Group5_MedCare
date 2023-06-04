@@ -3,8 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Doctor;
+<<<<<<< HEAD
+import Dashboard.*;
+=======
 
 import Dashboard.AdminHome;
+>>>>>>> main
 import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -21,7 +25,6 @@ import javax.swing.JFileChooser;
 
 /**
  *
- * @author Admin
  */
 public class DrPostResult extends javax.swing.JFrame {
 
@@ -50,7 +53,7 @@ public class DrPostResult extends javax.swing.JFrame {
         mainBack = new javax.swing.JPanel();
         topPanel = new javax.swing.JPanel();
         patientInfo = new javax.swing.JLabel();
-        backAdminHome = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
         AppID = new javax.swing.JTextField();
         Gender = new javax.swing.JTextField();
         name = new javax.swing.JTextField();
@@ -88,13 +91,13 @@ public class DrPostResult extends javax.swing.JFrame {
         patientInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/list.png"))); // NOI18N
         patientInfo.setText("Patient's medical information");
 
-        backAdminHome.setBackground(new java.awt.Color(39, 123, 192));
-        backAdminHome.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
-        backAdminHome.setForeground(new java.awt.Color(255, 255, 255));
-        backAdminHome.setText("Home");
-        backAdminHome.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setBackground(new java.awt.Color(0, 129, 201));
+        BackButton.setFont(new java.awt.Font("Bodoni MT", 0, 12)); // NOI18N
+        BackButton.setForeground(new java.awt.Color(255, 255, 255));
+        BackButton.setText("Home");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backAdminHomeActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
 
@@ -103,22 +106,30 @@ public class DrPostResult extends javax.swing.JFrame {
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(backAdminHome)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(patientInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(BackButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+<<<<<<< HEAD
+=======
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
                 .addContainerGap(147, Short.MAX_VALUE)
                 .addComponent(patientInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122))
+>>>>>>> main
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(backAdminHome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(patientInfo)
-                .addGap(41, 41, 41))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         AppID.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
@@ -283,7 +294,7 @@ public class DrPostResult extends javax.swing.JFrame {
                             .addGroup(mainBackLayout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 17, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         mainBackLayout.setVerticalGroup(
@@ -310,6 +321,9 @@ public class DrPostResult extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(address)
+<<<<<<< HEAD
+                    .addComponent(chooseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
 <<<<<<< HEAD:src/Doctor/DrPostResult.java
                     .addComponent(chooseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 =======
@@ -318,6 +332,7 @@ public class DrPostResult extends javax.swing.JFrame {
                         .addComponent(doc)
                         .addComponent(docBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
 >>>>>>> main:src/Admin/FinalPostResult.java
+>>>>>>> main
                 .addGap(18, 18, 18)
                 .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(res)
@@ -350,8 +365,11 @@ public class DrPostResult extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
+=======
     private void backAdminHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backAdminHomeActionPerformed
 
         AdminHome h = new AdminHome();
@@ -359,6 +377,7 @@ public class DrPostResult extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backAdminHomeActionPerformed
 
+>>>>>>> main
     private void AppIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AppIDActionPerformed
@@ -470,6 +489,13 @@ public class DrPostResult extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_resultBoxActionPerformed
 
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        // TODO add your handling code here:
+        AdminHome h = new AdminHome();
+        h.show();
+        this.dispose();
+    }//GEN-LAST:event_BackButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -510,13 +536,13 @@ public class DrPostResult extends javax.swing.JFrame {
     private javax.swing.JTextField AppDate;
     private javax.swing.JTextField AppID;
     private javax.swing.JTextField AppTime;
+    private javax.swing.JButton BackButton;
     private javax.swing.JTextField DOB;
     private javax.swing.JTextField Gender;
     private javax.swing.JLabel address;
     private javax.swing.JLabel appDate;
     private javax.swing.JLabel appID;
     private javax.swing.JLabel appTime;
-    private javax.swing.JButton backAdminHome;
     private javax.swing.JTextField chooseAddress;
     private javax.swing.JButton chooseImg;
     private javax.swing.JLabel con;
