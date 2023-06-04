@@ -61,36 +61,38 @@
                               <Component id="patName" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="chooseAddress" alignment="0" min="-2" pref="522" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="AppID" alignment="1" min="-2" pref="126" max="-2" attributes="0"/>
                                       <Component id="name" alignment="1" min="-2" pref="126" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="viewAppointment" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="dob" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="appDate" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="DOB" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
-                                      <Component id="AppDate" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="gender" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
-                                      <Component id="appTime" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="Gender" alignment="1" min="-2" pref="104" max="-2" attributes="0"/>
-                                      <Component id="AppTime" alignment="1" min="-2" pref="104" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
+                              <Component id="chooseAddress" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="dob" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="appDate" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="doc" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="DOB" alignment="1" pref="128" max="32767" attributes="0"/>
+                              <Component id="AppDate" alignment="1" pref="128" max="32767" attributes="0"/>
+                              <Component id="docBox" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="gender" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="appTime" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="Gender" alignment="1" min="-2" pref="104" max="-2" attributes="0"/>
+                              <Component id="AppTime" alignment="1" min="-2" pref="104" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       </Group>
@@ -142,9 +144,13 @@
                       <Component id="gender" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="chooseAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="address" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="chooseAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="doc" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="docBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -189,7 +195,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="149" max="32767" attributes="0"/>
+                      <EmptySpace pref="147" max="32767" attributes="0"/>
                       <Component id="patientInfo" min="-2" pref="529" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                   </Group>
@@ -413,6 +419,13 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Image"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="doc">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Doctor:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="docBox">
         </Component>
       </SubComponents>
     </Container>
