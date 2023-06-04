@@ -71,13 +71,17 @@ public class Feedback1 extends javax.swing.JFrame {
             return false;
         }
         
-        rate = Integer.parseInt(txt_rate.getText());
-        comment = comment_box.getText();
-        
-        if(rate < 1 || rate > 10){
+        try{
+            rate = Integer.parseInt(txt_rate.getText());
+            if(rate < 1 || rate > 10){
             JOptionPane.showMessageDialog(this, "Rating must be from 1-10");
             return false;
+            }
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Rating must be a number from 1-10");
+            return false;
         }
+        comment = comment_box.getText();
         
         if(comment.equals("")){
             JOptionPane.showMessageDialog(this, "Please give some comment");

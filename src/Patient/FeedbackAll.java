@@ -71,8 +71,17 @@ public class FeedbackAll extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please provide ratings");
             return false;
         }
-        
-        rate = Integer.parseInt(txt_rate.getText());
+        try{
+            rate = Integer.parseInt(txt_rate.getText());
+            if(rate < 1 || rate > 10){
+            JOptionPane.showMessageDialog(this, "Rating must be from 1-10");
+            return false;
+            }
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Rating must be a number from 1-10");
+            return false;
+        }
+//        rate = Integer.parseInt(txt_rate.getText());
         comment = comment_box.getText();
         
         if(rate < 1 || rate > 10){
