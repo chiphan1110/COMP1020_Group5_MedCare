@@ -3,7 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Admin;
+<<<<<<< HEAD
 import Dashboard.*;
+=======
+import Patient.FeedbackAll;
+import Dashboard.PatientHome;
+>>>>>>> main
 import java.awt.event.*;
 import java.sql.*;
 /**
@@ -103,6 +108,20 @@ public class AdViewFeedback extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(39, 123, 192));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+<<<<<<< HEAD
+=======
+        jButton2.setBackground(new java.awt.Color(0, 129, 201));
+        jButton2.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Home");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 20));
+
+>>>>>>> main
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/view all record.png"))); // NOI18N
@@ -328,8 +347,13 @@ public class AdViewFeedback extends javax.swing.JFrame {
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
         AdminHome home= new AdminHome();
         home.show();
+=======
+        PatientHome h = new PatientHome();
+        h.show();
+>>>>>>> main
         this.dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 
@@ -450,7 +474,10 @@ public class AdViewFeedback extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JButton BackButton;
+=======
+>>>>>>> main
     private javax.swing.JLabel appoint_date;
     private javax.swing.JLabel appoint_date1;
     private javax.swing.JLabel appoint_time;

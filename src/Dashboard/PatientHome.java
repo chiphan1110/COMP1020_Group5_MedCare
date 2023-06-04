@@ -154,9 +154,12 @@ public class PatientHome extends javax.swing.JFrame {
                     this.dispose();
                 }
             }
+<<<<<<< HEAD
            conn.close();
            stmt.close();
            resultSet.close();
+=======
+>>>>>>> main
                 
         }catch(Exception e){
             e.printStackTrace();
