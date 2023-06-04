@@ -4,11 +4,8 @@
  */
 package Dashboard;
 
-import MedInfo.*;
-import ManageAppointment.*;
-import BookAppointment.*;
 import Register.*;
-import Ratings.*;
+import Doctor.*;
 import java.awt.*;
 import javax.swing.*;
 import java.util.Objects;
@@ -35,10 +32,10 @@ public class DoctorHome extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnLogin = new javax.swing.JButton();
-        btnLogin1 = new javax.swing.JButton();
+        DrAppointResult = new javax.swing.JButton();
+        DrViewFB = new javax.swing.JButton();
         btnLogin3 = new javax.swing.JButton();
-        btnLogin4 = new javax.swing.JButton();
+        DrManageAppoint = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
@@ -50,29 +47,29 @@ public class DoctorHome extends javax.swing.JFrame {
         jPanel1.setRequestFocusEnabled(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnLogin.setBackground(new java.awt.Color(39, 123, 192));
-        btnLogin.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/list_1.png"))); // NOI18N
-        btnLogin.setText("<html><center>Medical Record <br> Management </center></html>");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        DrAppointResult.setBackground(new java.awt.Color(39, 123, 192));
+        DrAppointResult.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        DrAppointResult.setForeground(new java.awt.Color(255, 255, 255));
+        DrAppointResult.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/list_1.png"))); // NOI18N
+        DrAppointResult.setText("<html><center> Manage <br> Patient Record </center></html>");
+        DrAppointResult.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ManageAppointmentAction(evt);
             }
         });
-        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 290, 100));
+        jPanel1.add(DrAppointResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 290, 100));
 
-        btnLogin1.setBackground(new java.awt.Color(39, 123, 192));
-        btnLogin1.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        btnLogin1.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/about.png"))); // NOI18N
-        btnLogin1.setText("<html><center> View <br> Feedback </center></html>");
-        btnLogin1.addActionListener(new java.awt.event.ActionListener() {
+        DrViewFB.setBackground(new java.awt.Color(39, 123, 192));
+        DrViewFB.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        DrViewFB.setForeground(new java.awt.Color(255, 255, 255));
+        DrViewFB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/about.png"))); // NOI18N
+        DrViewFB.setText("<html><center> View <br> Feedback </center></html>");
+        DrViewFB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RatingAction(evt);
             }
         });
-        jPanel1.add(btnLogin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 290, 100));
+        jPanel1.add(DrViewFB, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 290, 100));
 
         btnLogin3.setBackground(new java.awt.Color(39, 123, 192));
         btnLogin3.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
@@ -85,17 +82,17 @@ public class DoctorHome extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogin3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 90, 40));
 
-        btnLogin4.setBackground(new java.awt.Color(39, 123, 192));
-        btnLogin4.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        btnLogin4.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogin4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/view all record.png"))); // NOI18N
-        btnLogin4.setText("<html><center> Appointment <br> Management </center></html>");
-        btnLogin4.addActionListener(new java.awt.event.ActionListener() {
+        DrManageAppoint.setBackground(new java.awt.Color(39, 123, 192));
+        DrManageAppoint.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        DrManageAppoint.setForeground(new java.awt.Color(255, 255, 255));
+        DrManageAppoint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/view all record.png"))); // NOI18N
+        DrManageAppoint.setText("<html><center> Manage <br> Appointment </center></html>");
+        DrManageAppoint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogin4MedicalReportAction(evt);
+                DrManageAppointMedicalReportAction(evt);
             }
         });
-        jPanel1.add(btnLogin4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 290, 100));
+        jPanel1.add(DrManageAppoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 290, 100));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 800, 400));
 
@@ -117,31 +114,28 @@ public class DoctorHome extends javax.swing.JFrame {
 
     private void RatingAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RatingAction
         // TODO add your handling code here:
-        Ratings2 rate = new Ratings2();
-        rate.show();
+        DrViewFeedback Fb = new DrViewFeedback();
+        Fb.show();
         this.dispose();
     }//GEN-LAST:event_RatingAction
 
     private void ManageAppointmentAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageAppointmentAction
-        ManageAppointment.Manage manage = new ManageAppointment.Manage();
-        manage.show();
+        DrPostResult post = new DrPostResult();
+        post.show();
         this.dispose();
-        
     }//GEN-LAST:event_ManageAppointmentAction
 
     private void MedicalReportAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicalReportAction
-        Register.Login login = new Register.Login();
-        login.show();
-        this.dispose();
+        
     }//GEN-LAST:event_MedicalReportAction
 
-    private void btnLogin4MedicalReportAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin4MedicalReportAction
+    private void DrManageAppointMedicalReportAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DrManageAppointMedicalReportAction
         // TODO add your handling code here:
-        MedReports med = new MedReports();
+        DrManageAppointment med = new DrManageAppointment();
         med.show();
         this.dispose();
         
-    }//GEN-LAST:event_btnLogin4MedicalReportAction
+    }//GEN-LAST:event_DrManageAppointMedicalReportAction
 
     /**
      * @param args the command line arguments
@@ -158,10 +152,10 @@ public class DoctorHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btnLogin1;
+    private javax.swing.JButton DrAppointResult;
+    private javax.swing.JButton DrManageAppoint;
+    private javax.swing.JButton DrViewFB;
     private javax.swing.JButton btnLogin3;
-    private javax.swing.JButton btnLogin4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
