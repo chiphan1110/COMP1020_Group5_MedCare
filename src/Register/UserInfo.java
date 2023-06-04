@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 //import signuplogin.Login;
-import Dashboard.Home;
+import Dashboard.PatientHome;
 import java.util.Date;
 import javax.swing.*;
 /**
@@ -236,7 +236,7 @@ public class UserInfo extends javax.swing.JFrame {
         
         if(CheckingInfo() && validation()){
             insertInfo();
-            Home home = new Home();
+            PatientHome home = new PatientHome();
             this.dispose();
             home.show();
         }

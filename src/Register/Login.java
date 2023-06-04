@@ -11,7 +11,7 @@ import Dashboard.*;
  */
 public class Login extends javax.swing.JFrame {
     String username, password;
-    public static int userid, doctorid;
+    public static int userid, staffID;
     /**
      * Creates new form Login
      */
@@ -22,7 +22,7 @@ public class Login extends javax.swing.JFrame {
 //    int getUserID(){
 //        
 //    }
-    void DoctorVerification(String username, String password){
+    void staffVerification(String username, String password){
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
@@ -32,11 +32,19 @@ public class Login extends javax.swing.JFrame {
             pst.setString(2, password);
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
-                doctorid = rs.getInt("UserID");
-                int isFirstLogin = rs.getInt("FirstLogin");
-                Home home = new Home();
-                home.show();
-                this.dispose();
+                staffID = rs.getInt("DoctorID");
+                if (staffID == 0){
+                    AdminHome adHome = new AdminHome();
+                    adHome.show();
+                    this.dispose();
+                }
+                else{
+
+                    DoctorHome drhome = new DoctorHome();
+                    drhome.show();
+                    this.dispose();
+                }
+                
             }else{
                 JOptionPane.showMessageDialog(this, "Wrong username or password!");
             }
@@ -64,7 +72,7 @@ public class Login extends javax.swing.JFrame {
                     ui.show();
                 }
                 else{
-                    Home home = new Home();
+                    PatientHome home = new PatientHome();
                     home.show();
                 }
                 this.dispose();
@@ -102,7 +110,7 @@ public class Login extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         btnLoginPatient = new javax.swing.JButton();
         btnSignup = new javax.swing.JButton();
-        btnLoginDoctor = new javax.swing.JButton();
+        btnLoginStaff = new javax.swing.JButton();
         lblError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -157,14 +165,14 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnLoginDoctor.setBackground(new java.awt.Color(39, 123, 192));
-        btnLoginDoctor.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        btnLoginDoctor.setForeground(new java.awt.Color(255, 255, 255));
-        btnLoginDoctor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/login.png"))); // NOI18N
-        btnLoginDoctor.setText("Login as Doctor");
-        btnLoginDoctor.addActionListener(new java.awt.event.ActionListener() {
+        btnLoginStaff.setBackground(new java.awt.Color(39, 123, 192));
+        btnLoginStaff.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        btnLoginStaff.setForeground(new java.awt.Color(255, 255, 255));
+        btnLoginStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/login.png"))); // NOI18N
+        btnLoginStaff.setText("Login as Staff");
+        btnLoginStaff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginDoctorActionPerformed(evt);
+                btnLoginStaffActionPerformed(evt);
             }
         });
 
@@ -184,9 +192,8 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnLoginPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)))
+                    .addComponent(btnLoginStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
@@ -195,16 +202,16 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(165, 165, 165))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(btnLoginDoctor)
-                        .addGap(79, 79, 79)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnLoginPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
                         .addComponent(btnSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,11 +222,11 @@ public class Login extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLoginPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoginDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoginStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
+                .addGap(105, 105, 105))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 162, 800, 440));
@@ -245,12 +252,16 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSignupActionPerformed
 
-    private void btnLoginDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginDoctorActionPerformed
+    private void btnLoginStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginStaffActionPerformed
         username = txtUsername.getText();
         password = txtPassword.getText();
-        DoctorVerification(username, password);
-        this.dispose();
-    }//GEN-LAST:event_btnLoginDoctorActionPerformed
+        if(username.trim().equals("") || password.trim().equals("")){
+            lblError.setText("Please enter username and password!");
+        }else{
+            staffVerification(username, password);
+        }
+        
+    }//GEN-LAST:event_btnLoginStaffActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,8 +300,8 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLoginDoctor;
     private javax.swing.JButton btnLoginPatient;
+    private javax.swing.JButton btnLoginStaff;
     private javax.swing.JButton btnSignup;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
