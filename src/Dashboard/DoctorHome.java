@@ -126,14 +126,10 @@ public class DoctorHome extends javax.swing.JFrame {
     }//GEN-LAST:event_ManageAppointmentAction
 
     private void MedicalReportAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicalReportAction
-<<<<<<< HEAD
 
         Register.Login login = new Register.Login();
         login.show();
         this.dispose();
-=======
-        
->>>>>>> main
     }//GEN-LAST:event_MedicalReportAction
 
     private void DrManageAppointMedicalReportAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DrManageAppointMedicalReportAction

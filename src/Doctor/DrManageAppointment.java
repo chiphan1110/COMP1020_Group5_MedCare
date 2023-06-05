@@ -4,10 +4,7 @@
  */
 package Doctor;
 import Register.*;
-<<<<<<< HEAD
 import Dashboard.*;
-=======
->>>>>>> main
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -73,11 +70,7 @@ public class DrManageAppointment extends javax.swing.JFrame {
                 int ID = rs.getInt("AppointmentID");
                 String D = rs.getString("Date");
 
-<<<<<<< HEAD
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-=======
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd");
->>>>>>> main
                 Date date = dateFormat.parse(D);
                 Date currentDate = new Date();
                 currentDate.setYear(0);
@@ -102,11 +95,7 @@ public class DrManageAppointment extends javax.swing.JFrame {
         try{
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-<<<<<<< HEAD
             PreparedStatement stmt = conn.prepareStatement("SELECT Appointment.AppointmentID, Appointment.Date, Appointment.Time, Appointment.Symptom, SignUp.Name, SignUp.UserID FROM Appointment INNER JOIN SignUp ON Appointment.UserID = SignUp.UserID WHERE Status = ? and DoctorID = ?");
-=======
-            PreparedStatement stmt = conn.prepareStatement("SELECT Appointment.*, SignUp.* FROM Appointment INNER JOIN SignUp ON Appointment.UserID = SignUp.UserID WHERE Status = ? and DoctorID = ?");
->>>>>>> main
             stmt.setString(1, "Incoming");
             stmt.setInt(2, doctorID);
             ResultSet rsTable = stmt.executeQuery();
@@ -401,11 +390,7 @@ public class DrManageAppointment extends javax.swing.JFrame {
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
         DoctorHome home = new DoctorHome();
-=======
-        Dashboard.PatientHome home = new Dashboard.PatientHome();
->>>>>>> main
         home.show();
         this.dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
