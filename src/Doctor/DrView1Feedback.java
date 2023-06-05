@@ -3,11 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Doctor;
-<<<<<<< HEAD
 import Dashboard.*;
-=======
-
->>>>>>> main
 import Register.Login;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -107,11 +103,7 @@ public class DrView1Feedback extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-<<<<<<< HEAD
         BackButton = new javax.swing.JButton();
-=======
-        jButton2 = new javax.swing.JButton();
->>>>>>> main
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         AppointID = new javax.swing.JLabel();
@@ -152,7 +144,6 @@ public class DrView1Feedback extends javax.swing.JFrame {
         jLabel2.setText("Feedbacks");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 300, 80));
 
-<<<<<<< HEAD
         BackButton.setBackground(new java.awt.Color(0, 129, 201));
         BackButton.setFont(new java.awt.Font("Bodoni MT", 0, 12)); // NOI18N
         BackButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -163,18 +154,6 @@ public class DrView1Feedback extends javax.swing.JFrame {
             }
         });
         jPanel1.add(BackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-=======
-        jButton2.setBackground(new java.awt.Color(0, 129, 201));
-        jButton2.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Back");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
->>>>>>> main
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, -4, 800, 160));
 
@@ -285,20 +264,12 @@ public class DrView1Feedback extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-=======
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
->>>>>>> main
         // TODO add your handling code here:
         DrManageAppointment mana = new DrManageAppointment();
         mana.show();
         this.dispose();
-<<<<<<< HEAD
     }//GEN-LAST:event_BackButtonActionPerformed
-=======
-    }//GEN-LAST:event_jButton2ActionPerformed
->>>>>>> main
 
     /**
      * @param args the command line arguments
@@ -368,10 +339,7 @@ public class DrView1Feedback extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AppointID;
-<<<<<<< HEAD
     private javax.swing.JButton BackButton;
-=======
->>>>>>> main
     private javax.swing.JLabel appoint_date;
     private javax.swing.JLabel appoint_fb;
     private javax.swing.JLabel appoint_rate;
@@ -379,10 +347,6 @@ public class DrView1Feedback extends javax.swing.JFrame {
     private javax.swing.JLabel doctor_depart;
     private javax.swing.JLabel doctor_id;
     private javax.swing.JLabel doctor_name;
-<<<<<<< HEAD
-=======
-    private javax.swing.JButton jButton2;
->>>>>>> main
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

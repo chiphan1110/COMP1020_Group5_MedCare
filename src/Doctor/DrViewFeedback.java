@@ -4,10 +4,7 @@
  */
 package Doctor;
 import Register.*;
-<<<<<<< HEAD
 import Dashboard.*;
-=======
->>>>>>> main
 import java.awt.event.*;
 import java.sql.*;
 /**
@@ -107,20 +104,6 @@ public class DrViewFeedback extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(39, 123, 192));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-<<<<<<< HEAD
-=======
-        jButton2.setBackground(new java.awt.Color(0, 129, 201));
-        jButton2.setFont(new java.awt.Font("Cambria", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Home");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 20));
-
->>>>>>> main
         jLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myicons/view all record.png"))); // NOI18N
@@ -347,15 +330,10 @@ public class DrViewFeedback extends javax.swing.JFrame {
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
         DoctorHome home = new DoctorHome();
         home.show();
         this.dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
-=======
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
->>>>>>> main
 
     /**
      * @param args the command line arguments
@@ -468,10 +446,7 @@ public class DrViewFeedback extends javax.swing.JFrame {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
     private javax.swing.JButton BackButton;
-=======
->>>>>>> main
     private javax.swing.JLabel appoint_date;
     private javax.swing.JLabel appoint_date1;
     private javax.swing.JLabel appoint_time;

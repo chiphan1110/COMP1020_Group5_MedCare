@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Admin;
-import Patient.MedRecord;
-import Patient.ManageApppointment;
 import Dashboard.*;
 import java.text.SimpleDateFormat;
 import java.sql.Connection;
@@ -402,11 +400,7 @@ public class AdManageTimeslot extends javax.swing.JFrame {
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
         AdminHome home = new AdminHome();
-=======
-        PatientHome home = new PatientHome();
->>>>>>> main
         home.show();
         this.dispose();
 
@@ -414,25 +408,11 @@ public class AdManageTimeslot extends javax.swing.JFrame {
 
     private void viewStatusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewStatusButtonActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
         AdManageAppointment mana = new AdManageAppointment();
-=======
-        ManageApppointment mana = new ManageApppointment();
->>>>>>> main
         mana.show();
         this.dispose();
     }//GEN-LAST:event_viewStatusButtonActionPerformed
 
-<<<<<<< HEAD
-=======
-    private void medicalRecordsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicalRecordsButtonActionPerformed
-        // TODO add your handling code here:
-        MedRecord med = new MedRecord();
-        med.show();
-        this.dispose();
-    }//GEN-LAST:event_medicalRecordsButtonActionPerformed
-
->>>>>>> main
     private void departmentComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentComboBoxActionPerformed
         // TODO add your handling code here:
         if (shouldPerformAction){

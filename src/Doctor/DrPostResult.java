@@ -3,12 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Doctor;
-<<<<<<< HEAD
 import Dashboard.*;
-=======
-
-import Dashboard.AdminHome;
->>>>>>> main
 import java.awt.Image;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -77,8 +72,6 @@ public class DrPostResult extends javax.swing.JFrame {
         con = new javax.swing.JLabel();
         pre = new javax.swing.JLabel();
         image = new javax.swing.JLabel();
-        doc = new javax.swing.JLabel();
-        docBox = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,13 +107,6 @@ public class DrPostResult extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addComponent(BackButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-<<<<<<< HEAD
-=======
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
-                .addContainerGap(147, Short.MAX_VALUE)
-                .addComponent(patientInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122))
->>>>>>> main
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,8 +218,6 @@ public class DrPostResult extends javax.swing.JFrame {
 
         image.setText("Image");
 
-        doc.setText("Doctor:");
-
         javax.swing.GroupLayout mainBackLayout = new javax.swing.GroupLayout(mainBack);
         mainBack.setLayout(mainBackLayout);
         mainBackLayout.setHorizontalGroup(
@@ -254,32 +238,30 @@ public class DrPostResult extends javax.swing.JFrame {
                             .addComponent(appID)
                             .addComponent(patName))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chooseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(mainBackLayout.createSequentialGroup()
                                 .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(AppID, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(viewAppointment))
-                            .addComponent(chooseAddress))
-                        .addGap(18, 18, 18)
-                        .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dob)
-                            .addComponent(appDate)
-                            .addComponent(doc))
-                        .addGap(18, 18, 18)
-                        .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(DOB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addComponent(AppDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addComponent(docBox))
-                        .addGap(18, 18, 18)
-                        .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(appTime))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Gender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AppTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(viewAppointment)
+                                .addGap(18, 18, 18)
+                                .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dob)
+                                    .addComponent(appDate))
+                                .addGap(18, 18, 18)
+                                .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(DOB, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AppDate, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(appTime))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Gender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AppTime, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(17, 17, 17))
                     .addGroup(mainBackLayout.createSequentialGroup()
                         .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,18 +303,7 @@ public class DrPostResult extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(address)
-<<<<<<< HEAD
                     .addComponent(chooseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-=======
-<<<<<<< HEAD:src/Doctor/DrPostResult.java
-                    .addComponent(chooseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-=======
-                    .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(chooseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(doc)
-                        .addComponent(docBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
->>>>>>> main:src/Admin/FinalPostResult.java
->>>>>>> main
                 .addGap(18, 18, 18)
                 .addGroup(mainBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(res)
@@ -368,16 +339,6 @@ public class DrPostResult extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
-=======
-    private void backAdminHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backAdminHomeActionPerformed
-
-        AdminHome h = new AdminHome();
-        h.show();
-        this.dispose();
-    }//GEN-LAST:event_backAdminHomeActionPerformed
-
->>>>>>> main
     private void AppIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AppIDActionPerformed
@@ -408,7 +369,7 @@ public class DrPostResult extends javax.swing.JFrame {
         try{
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection("jdbc:sqlite:C:\\sqlite\\db\\test.sqlite");
-            PreparedStatement stmt = con.prepareStatement("SELECT Appointment.UserID, Appointment.DoctorName, Appointment.Date, Appointment.Time, SignUp.Name, SignUp.DOB, SignUp.Gender, SignUp.Address FROM Appointment INNER JOIN SignUp ON Appointment.UserID = SignUp.UserID WHERE AppointmentID = ?"); 
+            PreparedStatement stmt = con.prepareStatement("SELECT Appointment.UserID, Appointment.Date, Appointment.Time, SignUp.Name, SignUp.DOB, SignUp.Gender, SignUp.Address FROM Appointment INNER JOIN SignUp ON Appointment.UserID = SignUp.UserID WHERE AppointmentID = ?"); 
             stmt.setInt(1, appointmentID);
             ResultSet rsfill = stmt.executeQuery();
             
@@ -419,11 +380,6 @@ public class DrPostResult extends javax.swing.JFrame {
                 chooseAddress.setText(rsfill.getString("Address"));
                 AppDate.setText(rsfill.getString("Date"));
                 AppTime.setText(rsfill.getString("Time"));
-                docBox.setText(rsfill.getString("DoctorName"));
-            }
-            String query = "SELECT COUNT(*) FROM Appointment WHERE AppointmentID = ?";
-            if (rsfill.getInt(1) == 0){
-                JOptionPane.showMessageDialog(null, "The provided ID does not exist.", "Error", JOptionPane.ERROR_MESSAGE);
             }
             stmt.close();
             con.close();
@@ -548,8 +504,6 @@ public class DrPostResult extends javax.swing.JFrame {
     private javax.swing.JLabel con;
     private javax.swing.JTextField conclusionBox;
     private javax.swing.JLabel dob;
-    private javax.swing.JLabel doc;
-    private javax.swing.JTextField docBox;
     private javax.swing.JLabel gender;
     private javax.swing.JLabel image;
     private javax.swing.JPanel mainBack;
